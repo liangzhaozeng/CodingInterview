@@ -1,7 +1,65 @@
 package algorithm.basic;
 
+import java.util.Stack;
+
 public class QuickSortIterative extends Sort {
   
+	
+	public static void recursvieQsort(int[] arr,Integer start, Integer end) { 
+	    if (end - start < 2) return; //stop clause
+	    int p = start + ((end-start)/2);
+	    p = partition(arr,p,start,end);
+	    recursvieQsort(arr, start, p);
+	    recursvieQsort(arr, p+1, end);
+
+	}
+
+	public static void iterativeQsort(int[] arr) { 
+	    Stack<Integer> stack = new Stack<Integer>();
+	    stack.push(0);
+	    stack.push(arr.length);
+	    while (!stack.isEmpty()) {
+	        int end = stack.pop();
+	        int start = stack.pop();
+	        if (end - start < 2) continue;
+	        int p = start + ((end-start)/2);
+	        p = partition(arr,p,start,end);
+
+	        stack.push(p+1);
+	        stack.push(end);
+
+	        stack.push(start);
+	        stack.push(p);
+
+	    }
+	}
+	
+	private static int partition(int[] arr, int p, int start, int end) {
+	    int l = start;
+	    int h = end - 2;
+	    int piv = arr[p];
+	    swap(arr,p,end-1);
+
+	    while (l < h) {
+	        if (arr[l] < piv) {
+	            l++;
+	        } else if (arr[h] >= piv) { 
+	            h--;
+	        } else { 
+	            swap(arr,l,h);
+	        }
+	    }
+	    int idx = h;
+	    if (arr[h] < piv) idx++;
+	    swap(arr,end-1,idx);
+	    return idx;
+	}
+	private static void swap(int[] arr, int i, int j) { 
+	    int temp = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = temp;
+	}
+	
   public void sort(int[] A) {
     
     int[] stack = new int[64];
