@@ -1,3 +1,5 @@
+http://en.wikipedia.org/wiki/Reservoir_sampling
+
 Reservoir sampling
 From Wikipedia, the free encyclopedia
 
