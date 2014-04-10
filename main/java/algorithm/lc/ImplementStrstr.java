@@ -69,4 +69,43 @@ public class ImplementStrstr {
     }
   }
 
+  
+  public String strStr(String haystack, String needle) {
+      int lenh = haystack.length();
+      int lenn = needle.length();
+      if (lenn > lenh) return null;
+      if (lenn == 0) return haystack;
+      int[] overlay = getOverlay(needle);
+      int i =0;
+      while (i <= lenh-lenn) { // the length difference
+          boolean success = true;
+          for (int j =0; j < lenn; j ++) {
+              if (needle.charAt(j) != haystack.charAt(i+j)) { // compare chart one by one
+                success = false;
+                 if (j ==0)  i ++;
+                 else i = i +j - overlay[j-1];
+                break;
+              }
+          }
+          if (success)
+          return haystack.substring(i);
+      }
+      return null;
+  }
+  public int[] getOverlay(String needle) {
+      int[] overlay = new int[needle.length()];
+      overlay[0] = 0;
+      for (int i = 1; i < needle.length(); i ++) {
+          int index = overlay[i-1];
+          while (index >0 && needle.charAt(index) != needle.charAt(i)){
+             index = overlay[index-1];
+          }
+          if (needle.charAt(index) == needle.charAt(i)) {
+              overlay[i] = overlay[i-1] +1;
+          } else overlay[i] =0;
+      }
+      
+      return overlay;
+  }
+  
 }
