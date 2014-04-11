@@ -19,6 +19,45 @@ public class SortList {
   }
 
   public static class Solution {
+	  
+	  public ListNode sortList(ListNode head) {
+	        if (head == null || head.next == null)
+	        return head;
+	        ListNode fast = head;
+	        ListNode slow = head;
+	        while (fast.next != null && fast.next.next !=null) {
+	            fast = fast.next.next;
+	            slow = slow.next;
+	        }
+	        fast = slow.next;
+	        slow.next = null;
+	        slow= sortList(head);
+	        fast = sortList(fast);
+	        return merge(slow, fast);
+	    }
+	    
+	    private ListNode merge(ListNode slow, ListNode fast){
+	        ListNode fakeHead = new ListNode(0);
+	        ListNode cur = fakeHead;
+	        while (slow != null && fast != null) {
+	            if (slow.val < fast.val) {
+	                cur.next = slow;
+	                slow = slow.next;
+	            } else {
+	                cur.next = fast;
+	                fast = fast.next;
+	            }
+	            cur = cur.next;
+	        }
+	        if (slow != null){
+	            cur.next = slow;
+	        }else if (fast != null){
+	            cur.next = fast;
+	        }
+	        return fakeHead.next;
+	    }
+	  
+	  
     
     static class HeadTail {
       ListNode head;
@@ -30,7 +69,7 @@ public class SortList {
       }
     }
     
-    public ListNode sortList(ListNode head) {
+    public ListNode sortList1(ListNode head) {
       // IMPORTANT: Please reset any member data you declared, as
       // the same Solution instance will be reused for each test case.
       if (head == null || head.next == null) { // list with less than 2 elements

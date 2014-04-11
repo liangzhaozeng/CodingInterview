@@ -17,6 +17,20 @@ public class MyTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		System.out.println(((59825-50175) / 50175.0)* 100);
+		System.out.println(((12920-10737) / 10737.0)*100);
+		
+		System.out.println((33967) / 50175.0);
+		System.out.println((13966) / 50175.0);
+		System.out.println((12920) / 50175.0);
+		
+		System.out.println((50175) / 110920.0);
+		
+		System.out.println((12920) / 110920.0);
+		
+		System.out.println((12920) / 87309.0);
+		
 		ListNode n3 = new ListNode(3);
 		ListNode n5 = new ListNode(5);
 		n3.next = n5;
