@@ -72,7 +72,7 @@ public class SymmetricTree {
           // Note: The Solution object is instantiated only once and is reused by each test case.
       Queue<TreeNode> left = new LinkedList<TreeNode>();
       Queue<TreeNode> right = new LinkedList<TreeNode>();
-      left.offer(root);
+      left.add(root);
       right.offer(root);
       // pair-wise match
       while (left.peek() != null || right.peek() != null) {

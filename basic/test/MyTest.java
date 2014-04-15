@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MyTest {
 
@@ -18,18 +19,11 @@ public class MyTest {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println(((59825-50175) / 50175.0)* 100);
-		System.out.println(((12920-10737) / 10737.0)*100);
+		String s = "a";
+		HashSet<String> set1 = new HashSet<String>();
 		
-		System.out.println((33967) / 50175.0);
-		System.out.println((13966) / 50175.0);
-		System.out.println((12920) / 50175.0);
-		
-		System.out.println((50175) / 110920.0);
-		
-		System.out.println((12920) / 110920.0);
-		
-		System.out.println((12920) / 87309.0);
+		set1.add(s);
+		System.out.println(wordBreak(s, set1));
 		
 		ListNode n3 = new ListNode(3);
 		ListNode n5 = new ListNode(5);
@@ -40,7 +34,27 @@ public class MyTest {
 		System.out.println(subsetsWithDup(height));
 
 	}
+	
+	public static boolean wordBreak(String s, Set<String> dict) {
+        if (s == null || s.length() ==0) return true;
+        else {
+            for (int i = 1; i<=s.length(); i ++) {
+                String sub = s.substring(0, i);
+                if (dict.contains(sub)) {
+                    if (i == (s.length())) {
+                        return true;
+                    }
+                    if (wordBreak(s.substring(i, s.length()-1), dict))
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 
+	
+	
+	
 	public static int[] RandomizeArray(int[] array){
 		Random rgen = new Random();  // Random number generator			
  

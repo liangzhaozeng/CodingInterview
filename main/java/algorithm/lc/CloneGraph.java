@@ -2,6 +2,7 @@ package algorithm.lc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -30,48 +31,83 @@ import java.util.Map;
  */
 public class CloneGraph {
 
-  class UndirectedGraphNode {
-    int label;
-    ArrayList<UndirectedGraphNode> neighbors;
+	class UndirectedGraphNode {
+		int label;
+		ArrayList<UndirectedGraphNode> neighbors;
 
-    UndirectedGraphNode(int x) {
-      label = x;
-      neighbors = new ArrayList<UndirectedGraphNode>();
-    }
-  };
+		UndirectedGraphNode(int x) {
+			label = x;
+			neighbors = new ArrayList<UndirectedGraphNode>();
+		}
+	};
 
-  public class Solution {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-      // Note: The Solution object is instantiated only once and is reused by
-      // each test case.
-      if (node == null) {
-        return null;
-      }
-      Map<Integer, UndirectedGraphNode> visited = new HashMap<Integer, UndirectedGraphNode>();
-      return copy(node, visited);
-    }
+	public class Solution {
 
-    private UndirectedGraphNode copy(UndirectedGraphNode node,
-        Map<Integer, UndirectedGraphNode> visited) {
-      if (node == null) {
-        return null;
-      }
+		public UndirectedGraphNode cloneGraph2(UndirectedGraphNode node) {
+			// Note: The Solution object is instantiated only once and is reused
+			// by each test case.
+			if (node == null) {
+				return node;
+			}
+			UndirectedGraphNode result = new UndirectedGraphNode(node.label);
+			LinkedList<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+			queue.add(node);
+			Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
+			map.put(node, result);
 
-      UndirectedGraphNode newNode = visited.get(node.label); // find existing
-                                                             // new node
-      if (newNode != null) {
-        return newNode;
-      }
+			while (!queue.isEmpty()) {
+				UndirectedGraphNode nodeInQueue = queue.poll();
+				ArrayList<UndirectedGraphNode> neighbors = nodeInQueue.neighbors;
+				for (int i = 0; i < neighbors.size(); i++) {
+					UndirectedGraphNode n1 = neighbors.get(i);
+					if (map.containsKey(n1)) {
+						map.get(nodeInQueue).neighbors.add(map.get(n1));
+					} else {
+						UndirectedGraphNode n1clone = new UndirectedGraphNode(
+								n1.label);
+						map.get(nodeInQueue).neighbors.add(n1clone);
+						map.put(n1, n1clone);
+						queue.add(n1);
+					}
+				}
 
-      newNode = new UndirectedGraphNode(node.label);
-      visited.put(node.label, newNode); // add new node to index
+			}
+			return result;
+		}
 
-      for (UndirectedGraphNode neighbor : node.neighbors) {
-        newNode.neighbors.add(copy(neighbor, visited));
-      }
+		public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+			// Note: The Solution object is instantiated only once and is reused
+			// by
+			// each test case.
+			if (node == null) {
+				return null;
+			}
+			Map<Integer, UndirectedGraphNode> visited = new HashMap<Integer, UndirectedGraphNode>();
+			return copy(node, visited);
+		}
 
-      return newNode;
-    }
-  }
+		private UndirectedGraphNode copy(UndirectedGraphNode node,
+				Map<Integer, UndirectedGraphNode> visited) {
+			if (node == null) {
+				return null;
+			}
+
+			UndirectedGraphNode newNode = visited.get(node.label); // find
+																	// existing
+																	// new node
+			if (newNode != null) {
+				return newNode;
+			}
+
+			newNode = new UndirectedGraphNode(node.label);
+			visited.put(node.label, newNode); // add new node to index
+
+			for (UndirectedGraphNode neighbor : node.neighbors) {
+				newNode.neighbors.add(copy(neighbor, visited));
+			}
+
+			return newNode;
+		}
+	}
 
 }
