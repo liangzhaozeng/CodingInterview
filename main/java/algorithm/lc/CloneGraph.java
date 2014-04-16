@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  * Clone an undirected graph. Each node in the graph contains a label and a list
@@ -50,8 +51,8 @@ public class CloneGraph {
 				return node;
 			}
 			UndirectedGraphNode result = new UndirectedGraphNode(node.label);
-			LinkedList<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
-			queue.add(node);
+			Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+			queue.offer(node);
 			Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
 			map.put(node, result);
 
@@ -67,7 +68,7 @@ public class CloneGraph {
 								n1.label);
 						map.get(nodeInQueue).neighbors.add(n1clone);
 						map.put(n1, n1clone);
-						queue.add(n1);
+						queue.offer(n1);
 					}
 				}
 

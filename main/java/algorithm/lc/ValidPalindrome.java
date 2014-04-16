@@ -21,7 +21,7 @@ public class ValidPalindrome {
     public boolean isPalindrome(String s) {
           // Start typing your Java solution below
           // DO NOT write main() function
-      s = s.trim();
+      s = s.trim().toLowerCase();
       if (s.length() == 0) {
         return true;
       }
@@ -36,7 +36,7 @@ public class ValidPalindrome {
         if (i >= j) {
           return true;
         }
-        if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
+        if (s.charAt(i) != s.charAt(j)) {
           return false;
         }
         ++i;

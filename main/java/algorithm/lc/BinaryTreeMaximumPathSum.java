@@ -31,7 +31,7 @@ public class BinaryTreeMaximumPathSum {
           // IMPORTANT: Please reset any member data you declared, as
           // the same Solution instance will be reused for each test case.
       int[] max = new int[1];
-      max[0] = Integer.MIN_VALUE;
+      max[0] = Integer.MIN_VALUE; 
       maxPath(root, max);
       return max[0];
     }
