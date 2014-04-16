@@ -1,5 +1,8 @@
 package algorithm.lc;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Follow up for problem "Populating Next Right Pointers in Each Node".
  * 
@@ -35,6 +38,64 @@ public class PopulatingNextRightPointersInEachNodeII {
       val = x;
     }
   }
+  
+  public class Solutionq2 {
+	    public void connect(TreeLinkNode root) {
+	        if(root == null)
+	            return;
+	        Queue<TreeLinkNode> queue = new LinkedList<TreeLinkNode>();
+	        queue.offer(root);
+	        int leftCount = 1;
+	        TreeLinkNode last = null;
+	        while(!queue.isEmpty()){
+	            if(leftCount == 0){
+	                leftCount = queue.size();
+	                last = null;
+	            }
+	            TreeLinkNode node = queue.poll();
+	            leftCount--;
+	            if(node.left != null)
+	                queue.offer(node.left);
+	            if(node.right != null)
+	                queue.offer(node.right);
+	            if(last != null)
+	                last.next = node;
+	            last = node;
+	        }
+	    }
+	}
+  
+  public class Solutionq {  
+	    public void connect(TreeLinkNode root) {  
+	        // Note: The Solution object is instantiated only once and is reused by each test case.  
+	        if(root == null)  
+	            return ;  
+	        Queue<TreeLinkNode> que = new LinkedList<TreeLinkNode>();  
+	        que.add(root);  
+	        que.add(null);  
+	        while(true)  
+	        {  
+	            //poll() method return the head of queue and remove it.  
+	            TreeLinkNode cur = que.poll();  
+	            if(que.isEmpty())  
+	                break;  
+	            if(cur != null)  
+	            {  
+	                cur.next = que.peek();  
+	            }  
+	            else  
+	            {  
+	                que.add(null);  
+	                continue;  
+	            }  
+	            if(cur.left != null)  
+	                que.add(cur.left);  
+	            if(cur.right != null)  
+	                que.add(cur.right);  
+	        }  
+	          
+	    }  
+	}  
 
   // O(1) space, O(n) time
   // recurively linke right sub-tree and left sub-tree
