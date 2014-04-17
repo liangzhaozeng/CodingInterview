@@ -22,7 +22,7 @@ public class MinimumDepthOfBinaryTree {
     }
   }
 
-  public class Solution2 {
+  public class Solution2qaz {
 	    public int minDepth(TreeNode root) {
 	      if(root==null)
 	            return 0;
