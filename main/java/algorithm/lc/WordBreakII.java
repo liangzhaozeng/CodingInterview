@@ -73,7 +73,7 @@ public class WordBreakII {
 			// by each test case.
 			ArrayList<String> res = new ArrayList<String>();
 			Stack<String> cur = new Stack<String>();
-			Map<String, Boolean> cache = new HashMap<String, Boolean>();
+		
 			found(s, dict, cur, res);
 			return res;
 		}
