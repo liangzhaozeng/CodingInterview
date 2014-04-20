@@ -9,6 +9,30 @@ public class KnapSack {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
+	
+	static public class Item {
+		public int size;
+		public int val;
+	}
+	
+	
+	
+	static int knap(int cap, Item[] items, int N) {
+		int i, space, max, t;
+		
+		for (i = 0, max=0; i <N; i ++) {
+			if ((space=cap-items[i].size) >=0)
+				if ((t=knap(space, items, N-1)+ items[i].val)>max)
+					max =t;
+		
+		}
+		return max;
+	}
+	
+	
+
 
 	// Returns the maximum value that can be put in a knapsack of capacity W
    public int knapSack(int wt[], int val[]) {
