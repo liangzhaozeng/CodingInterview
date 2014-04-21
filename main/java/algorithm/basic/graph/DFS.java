@@ -1,6 +1,7 @@
 package algorithm.basic.graph;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class DFS {
 
@@ -55,6 +56,49 @@ public class DFS {
 		// Call the recursive helper function to print DFS traversal
 		DFSUtil(v, visited, graph);
 	}
+	
+	/*
+	 def dfs2(G,s):
+    visited = set()
+    stack = [s]
+    while stack:
+        v = stack.pop()
+        if v not in visited:
+            visited.add(v)
+            for w in G[v]:
+                stack.append(w)
+	 */
+	
+	
+	static void DFS1(Graph graph, int v) {
+		// Mark all the vertices as not visited
+		boolean[] visited = new boolean[graph.V];
+		for (int i = 0; i < graph.V; i++)
+			visited[i] = false;
+
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(v);
+		
+		while (!stack.isEmpty()){
+			int vertex = stack.pop();
+			if (!visited[vertex]) {
+			   System.out.print(vertex + "  ");
+			   visited[vertex]= true;
+			
+			    for (int i = 0; i < graph.adj.get(vertex).size(); i++) {
+				int newVertex = graph.adj.get(vertex).get(i);
+				
+				stack.push(newVertex);
+				
+				}
+			}
+			}
+		}
+		
+		
+		
+	
+
 
 	/**
 	 * @param args
@@ -71,6 +115,10 @@ public class DFS {
 		System.out
 				.println("Following is Depth First Traversal (starting from vertex 2) ");
 		DFS(g, 2);
+		System.out.println();
+		System.out
+		.println("Following is Depth First Traversal (starting from vertex 2) ");
+		DFS1(g,2);
 
 	}
 
