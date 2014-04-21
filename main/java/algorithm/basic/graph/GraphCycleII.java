@@ -1,6 +1,9 @@
 package algorithm.basic.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import algorithm.basic.graph.GraphCycle.Graph;
 
 public class GraphCycleII {
 
@@ -55,6 +58,45 @@ public class GraphCycleII {
 		return false;
 	}
 
+	// A utility function to find the subset of an element i
+	static int find(int parent[], int i) {
+		if (parent[i] == -1)
+			return i;
+		return find(parent, parent[i]);
+	}
+
+	// A utility function to do union of two subsets
+	static void Union(int parent[], int x, int y) {
+		int xset = find(parent, x);
+		int yset = find(parent, y);
+		parent[xset] = yset;
+	}
+
+	// The main function to check whether a given graph contains cycle or not
+	public static boolean isCycle2(Graph graph) {
+		// Allocate memory for creating V subsets
+		int[] parent = new int[graph.V];
+
+		Arrays.fill(parent, -1);
+
+		// Iterate through all edges of graph, find subset of both
+		// vertices of every edge, if both subsets are same, then there is
+		// cycle in graph.
+		for (int i = 0; i < graph.adj.size(); ++i) {
+			for (int j = 0; j < graph.adj.get(i).size(); j++) {
+
+				int x = find(parent, i);
+				int y = find(parent, graph.adj.get(i).get(j));
+
+				if (x == y)
+					return true;
+
+				Union(parent, x, y);
+			}
+		}
+		return false;
+	}
+
 	// Returns true if the graph contains a cycle, else false.
 	// This function is a variation of DFS() in
 	// http://www.geeksforgeeks.org/archives/18212
@@ -79,22 +121,25 @@ public class GraphCycleII {
 	}
 
 	public static void main(String[] args) {
-		
-			// Create a graph given in the above diagram
-			Graph g = new Graph(4);
-			g.addEdge(0, 1);
-			g.addEdge(0, 2);
-			g.addEdge(1, 2);
-			g.addEdge(2, 0);
-			g.addEdge(2, 3);
-			g.addEdge(3, 3);
 
-			if (isCyclic(g))
-				System.out.println("Graph contains cycle");
-			else
-				System.out.println("Graph doesn't contain cycle");
+		// Create a graph given in the above diagram
+		Graph g = new Graph(4);
+		g.addEdge(0, 1);
+		g.addEdge(0, 2);
+	//	g.addEdge(1, 2);
+	//	g.addEdge(2, 0);
+		g.addEdge(2, 3);
+	//	g.addEdge(3, 3);
 
-		
+		if (isCyclic(g))
+			System.out.println("Graph contains cycle");
+		else
+			System.out.println("Graph doesn't contain cycle");
+
+		if (isCycle2(g))
+			System.out.println("Graph contains cycle");
+		else
+			System.out.println("Graph doesn't contain cycle");
 
 	}
 }
