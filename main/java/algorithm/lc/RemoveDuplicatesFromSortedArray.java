@@ -14,23 +14,38 @@ package algorithm.lc;
  */
 public class RemoveDuplicatesFromSortedArray {
 
-  public class Solution {
-    // two pointers, i move forward, j point to the last valid element
-    public int removeDuplicates(int[] A) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      if(A.length < 2) {
-        return A.length;
-      }
-      int len = 1;
-      for(int i = 1; i < A.length; ++i) {
-        if(A[i] != A[i - 1]) {  // A[i] is duplicate
-          A[len++] = A[i];
-        }
-      }
+	public class Solution {
 
-      return len;
-    }
-  }
+		public int removeDuplicates2(int[] A) {
+			
+			if (A.length < 3) {
+				return A.length;
+			}
+			int len = 2;
+			for (int i = 2; i < A.length; ++i) {
+				if ( A[i] != A[len - 2]) {
+					A[len++] = A[i];
+				}
+			}
+			return len;
+		}
+
+		// two pointers, i move forward, j point to the last valid element
+		public int removeDuplicates(int[] A) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			if (A.length < 2) {
+				return A.length;
+			}
+			int len = 1;
+			for (int i = 1; i < A.length; ++i) {
+				if (A[i] != A[i - 1]) { // A[i] is duplicate
+					A[len++] = A[i];
+				}
+			}
+
+			return len;
+		}
+	}
 
 }
