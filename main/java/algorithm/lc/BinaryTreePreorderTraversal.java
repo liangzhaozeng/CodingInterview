@@ -35,6 +35,40 @@ public class BinaryTreePreorderTraversal {
    *
    */
   public class Solution {
+	  
+	  public ArrayList<Integer> preorderTraversal2(TreeNode root) {
+			ArrayList<Integer> result = new ArrayList<Integer>();
+			TreeNode current, pre;
+
+			if (root == null)
+				return result;
+
+			current = root;
+			while (current != null) {
+				if (current.left == null) {
+					result.add(current.val);
+					current = current.right;
+				} else {
+					/* Find the inorder predecessor of current */
+					pre = current.left;
+					while (pre.right != null && pre.right != current)
+						pre = pre.right; /* Make current as right child of its inorder predecessor */
+					if (pre.right == null)  {
+						pre.right = current;
+						result.add(current.val);
+						current = current.left;
+					}	else {                     // Revert the changes made in if part to restore the
+						pre.right = null;          // original tree i.e., fix the right child of predecssor
+					
+						current = current.right;
+					} /* End of if condition pre->right == NULL */
+				} /* End of if condition current->left == NULL */
+			} /* End of while */
+
+			return result;
+		}  
+	  
+	  
     public ArrayList<Integer> preorderTraversal(TreeNode root) {
       // IMPORTANT: Please reset any member data you declared, as
       // the same Solution instance will be reused for each test case.
