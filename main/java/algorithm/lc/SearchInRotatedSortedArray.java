@@ -13,33 +13,33 @@ package algorithm.lc;
  */
 public class SearchInRotatedSortedArray {
 
-  public class Solution {
-    public int search(int[] A, int target) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      int left = 0, right = A.length - 1;
+	public class Solution {
+		public int search(int[] A, int target) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			int left = 0, right = A.length - 1;
 
-      while (left <= right) {
-        int mid = (left + right) / 2;
-        if (A[mid] == target) {
-          return mid;
-        } else if (A[left] <= A[mid]) { // left part sorted
-          if (A[left] <= target && target < A[mid]) {
-            right = mid - 1; // search left part
-          } else {
-            left = mid + 1; // search right part
-          }
-        } else { // right part sorted
-          if (A[mid] < target && target <= A[right]) {
-            left = mid + 1;
-          } else {
-            right = mid - 1;
-          }
-        }
-      }
+			while (left <= right) {
+				int mid = (left + right) / 2;
+				if (A[mid] == target) {
+					return mid;
+				} else if (A[left] <= A[mid]) { // left part sorted
+					if (A[left] <= target && target < A[mid]) {
+						right = mid - 1; // search left part
+					} else {
+						left = mid + 1; // search right part
+					}
+				} else { // right part sorted
+					if (A[mid] < target && target <= A[right]) {
+						left = mid + 1;
+					} else {
+						right = mid - 1;
+					}
+				}
+			}
 
-      return -1;
-    }
-  }
+			return -1;
+		}
+	}
 
 }

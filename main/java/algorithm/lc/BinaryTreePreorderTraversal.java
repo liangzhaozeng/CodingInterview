@@ -45,7 +45,7 @@ public class BinaryTreePreorderTraversal {
 
 			current = root;
 			while (current != null) {
-				if (current.left == null) {
+				if (current.left == null) {  // if left is null, then access the current root first
 					result.add(current.val);
 					current = current.right;
 				} else {
@@ -60,7 +60,7 @@ public class BinaryTreePreorderTraversal {
 					}	else {                     // Revert the changes made in if part to restore the
 						pre.right = null;          // original tree i.e., fix the right child of predecssor
 					
-						current = current.right;
+						current = current.right;   // left child tree is done, go to right
 					} /* End of if condition pre->right == NULL */
 				} /* End of if condition current->left == NULL */
 			} /* End of while */
