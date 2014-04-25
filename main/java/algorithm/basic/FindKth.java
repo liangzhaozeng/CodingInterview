@@ -2,6 +2,12 @@ package algorithm.basic;
 
 public class FindKth {
 
+	public static void main(String[] args) {
+	   int[] A = {1, 4, 2,5,9,5,3};
+	   System.out.println(findKth(A, 3));
+	  int[] B = {1, 4, 2,5,9,5,3};
+	   System.out.println(findKth(B, 3, 0, B.length-1));
+	}
   /**
    * 0-th smallest is the smallest.
    * 
@@ -37,7 +43,7 @@ public class FindKth {
     if (pivot == k) {
       return A[pivot];
     } else if (pivot < k) { // find the (k - pivot)-th from the second half
-      return findKth(A, k, pivot + 1, end);
+      return findKth(A, k-pivot-1, pivot + 1, end);
     } else { // pivot > k, find the k-th from the first half
       return findKth(A, k, start, pivot - 1);
     }

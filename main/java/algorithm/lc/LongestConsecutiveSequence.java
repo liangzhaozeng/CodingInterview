@@ -13,32 +13,33 @@ import java.util.Set;
 // O(n) space, O(n) time
 public class LongestConsecutiveSequence {
 
-  public class Solution {
-    // add all elements to set, and check each element by removing its neighbors
-    public int longestConsecutive(int[] num) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      Set<Integer> set = new HashSet<Integer>();
-      for (int i : num) {
-        set.add(i);
-      }
-      int max = 0;
-      for (int i : num) {
-        int left = i - 1;
-        int right = i + 1;
-        int count = 1;
-        while (set.contains(left)) {
-          set.remove(left--);
-          ++count;
-        }
-        while (set.contains(right)) {
-          set.remove(right++);
-          ++count;
-        }
-        max = Math.max(max, count);
-      }
-      return max;
-    }
-  }
+	public class Solution {
+		// add all elements to set, and check each element by removing its
+		// neighbors
+		public int longestConsecutive(int[] num) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			Set<Integer> set = new HashSet<Integer>();
+			for (int i : num) {
+				set.add(i);
+			}
+			int max = 0;
+			for (int i : num) {
+				int left = i - 1;
+				int right = i + 1;
+				int count = 1;
+				while (set.contains(left)) {
+					set.remove(left--);
+					++count;
+				}
+				while (set.contains(right)) {
+					set.remove(right++);
+					++count;
+				}
+				max = Math.max(max, count);
+			}
+			return max;
+		}
+	}
 
 }

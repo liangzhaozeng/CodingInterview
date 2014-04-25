@@ -2,6 +2,7 @@ package algorithm.lc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Given an array S of n integers, are there elements a, b, c, and d in S such
@@ -19,62 +20,103 @@ import java.util.Arrays;
  */
 // O(n^3) space, O(n^3) time
 public class FourSum {
+	public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
+		Arrays.sort(num);
+		HashSet<ArrayList<Integer>> hashSet = new HashSet<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 
-  public class Solution {
-    // use two pointers inside a two-level nested loop
-    public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      Arrays.sort(num);
-      ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-      
-      for (int i = 0; i < num.length - 3; ++i) {
-        if (i > 0 && num[i] == num[i - 1]) { // skip duplicate
-          continue;
-        }
-        for (int j = i + 1; j < num.length - 2; ++j) {
-          if (j > i + 1 && num[j] == num[j - 1]) { // skip duplicate
-            continue; 
-          }
-          int k = j + 1;
-          int l = num.length - 1;
-          while (k < l) {
-            int sum = num[i] + num[j] + num[k] + num[l];
-            if (sum < target) {
-              ++k;
-              while (k > j + 1 && k < l && num[k] == num[k - 1]) { // skip duplicate
-                ++k;
-              }
-            }
-            else if (sum > target) {
-              --l;
-              while (k < l && num[l] == num[l + 1]) {  // skip duplicate
-                --l;
-              }
-            }
-            else {
-              ArrayList<Integer> sol = new ArrayList<Integer>();
-              sol.add(num[i]);
-              sol.add(num[j]);
-              sol.add(num[k]);
-              sol.add(num[l]);
-              res.add(sol);
-              ++k;
-              --l;
-              while (k > j + 1 && k < l && num[k] == num[k - 1]) { // skip duplicate
-                ++k;
-              }
-              while (k < l && num[l] == num[l + 1]) {  // skip duplicate
-                --l;
-              }
-            }
-            
-          }
-        }
-      }
-      
-      return res;
-    }
-  }
+		for (int i = 0; i < num.length; i++) {
+			for (int j = i + 1; j < num.length; j++) {
+				int k = j + 1;
+				int l = num.length - 1;
+
+				while (k < l) {
+					int sum = num[i] + num[j] + num[k] + num[l];
+
+					if (sum > target) {
+						l--;
+					} else if (sum < target) {
+						k++;
+					} else if (sum == target) {
+						ArrayList<Integer> temp = new ArrayList<Integer>();
+						temp.add(num[i]);
+						temp.add(num[j]);
+						temp.add(num[k]);
+						temp.add(num[l]);
+
+						if (!hashSet.contains(temp)) {
+							hashSet.add(temp);
+							result.add(temp);
+						}
+
+						k++;
+						l--;
+					}
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	public class Solution {
+		// use two pointers inside a two-level nested loop
+		public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			Arrays.sort(num);
+			ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+
+			for (int i = 0; i < num.length - 3; ++i) {
+				if (i > 0 && num[i] == num[i - 1]) { // skip duplicate
+					continue;
+				}
+				for (int j = i + 1; j < num.length - 2; ++j) {
+					if (j > i + 1 && num[j] == num[j - 1]) { // skip duplicate
+						continue;
+					}
+					int k = j + 1;
+					int l = num.length - 1;
+					while (k < l) {
+						int sum = num[i] + num[j] + num[k] + num[l];
+						if (sum < target) {
+							++k;
+							while (k > j + 1 && k < l && num[k] == num[k - 1]) { // skip
+																					// duplicate
+								++k;
+							}
+						} else if (sum > target) {
+							--l;
+							while (k < l && num[l] == num[l + 1]) { // skip
+																	// duplicate
+								--l;
+							}
+						} else {
+							ArrayList<Integer> sol = new ArrayList<Integer>();
+							sol.add(num[i]);
+							sol.add(num[j]);
+							sol.add(num[k]);
+							sol.add(num[l]);
+							res.add(sol);
+							++k;
+							--l;
+							while (k > j + 1 && k < l && num[k] == num[k - 1]) { // skip
+																					// duplicate
+								++k;
+							}
+							while (k < l && num[l] == num[l + 1]) { // skip
+																	// duplicate
+								--l;
+							}
+						}
+
+					}
+				}
+			}
+
+			return res;
+		}
+	}
 
 }
