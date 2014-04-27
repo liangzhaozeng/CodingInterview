@@ -22,6 +22,26 @@ public class RemoveDuplicatesFromSortedListII {
   }
 
   public class Solution {
+	  
+	  public ListNode deleteDuplicates2(ListNode head) {
+	        if (head ==null || head.next==null) {
+	        	return head;
+	        }
+	        ListNode p = head.next;
+	        if (head.val == p.val) {
+	        	while(p!=null && head.val== p.val) {
+	        
+	        		p = p.next;
+	        	}
+	        	return deleteDuplicates2(p);
+	        } else {
+	        	head.next = deleteDuplicates2(head.next);
+	        	return head;
+	        }
+	    }
+	  
+	  
+	  
     // use three pointer
     // when current pointer equals to next pointer, move forward until no
     // duplicate

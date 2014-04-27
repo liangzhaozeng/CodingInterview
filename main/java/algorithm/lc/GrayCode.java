@@ -12,13 +12,9 @@ import java.util.ArrayList;
  * 
  * For example, given n = 2, return [0,1,3,2]. Its gray code sequence is:
  * 
- * 00 - 0 
- * 01 - 1 
- * 11 - 3 
- * 10 - 2 
+ * 00 - 0 01 - 1 11 - 3 10 - 2
  * 
- * Note: For a given n, a gray code sequence is not
- * uniquely defined.
+ * Note: For a given n, a gray code sequence is not uniquely defined.
  * 
  * For example, [0,2,3,1] is also a valid gray code sequence according to the
  * above definition.
@@ -27,55 +23,93 @@ import java.util.ArrayList;
  * sequence. Sorry about that.
  * 
  */
+
 // O(2^n) space, O(2^n) time
 public class GrayCode {
 
-  public static class Solution {
-    // build list of n from list of n - 1
-    // 1. get the reverse of the list
-    // 2. add suffix 0 to original list, add suffix 1 to reversed list
-    // 3. concatenate two lists
-    public static ArrayList<Integer> grayCode(int n) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      ArrayList<StringBuilder> res = new ArrayList<StringBuilder>();
-      if (n == 0) {
-        ArrayList<Integer> zero = new ArrayList<Integer>();
-        zero.add(0);
-        return zero;
-      }
+	public ArrayList<Integer> grayCode(int n) {
 
-      res.add(new StringBuilder().append(0));
-      res.add(new StringBuilder().append(1));
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if (n == 0) {
+			result.add(0);
+			return result;
+		}
 
-      // generate gray codes
-      for (int i = 0; i < n - 1; ++i) {
-        ArrayList<StringBuilder> reflectListWithOne = new ArrayList<StringBuilder>();
-        for (int j = res.size() - 1; j >= 0; --j) {
-          StringBuilder sb = new StringBuilder(res.get(j).toString());
-          reflectListWithOne.add(sb.append('1'));
-        }
-        for (int j = 0; j < res.size(); ++j) {
-          StringBuilder sb = res.get(j);
-          sb.append('0');
-        }
-        res.addAll(reflectListWithOne);
-      }
-      // convert to integer
-      ArrayList<Integer> grayCodes = new ArrayList<Integer>();
-      for (int i = 0; i < res.size(); ++i) {
-        String str = res.get(i).toString();
-        int val = 0;
-        int base = 1;
-        for (int d = 0; d < str.length(); ++d) { // actually reverse the order is also a valid sequences
-          val += base * (str.charAt(d) - '0');
-          base <<= 1;
-        }
-        grayCodes.add(val);
-      }
+		ArrayList<String> resStr = grayCodeString(n);
+		for (String str : resStr) {
+			result.add(Integer.parseInt(str, 2));
 
-      return grayCodes;
-    }
-  }
+		}
+		return result;
+	}
+
+	public ArrayList<String> grayCodeString(int n) {
+
+		ArrayList<String> result = new ArrayList<String>();
+		if (n == 1) {
+			result.add("0");
+			result.add("1");
+		} else {
+			ArrayList<String> temp = grayCodeString(n - 1);
+			for (String cur : temp) {
+				result.add("0" + cur);
+			}
+			for (int i = temp.size() - 1; i >= 0; i--) {
+				result.add("1" + temp.get(i));
+			}
+
+		}
+		return result;
+	}
+
+	public static class Solution {
+		// build list of n from list of n - 1
+		// 1. get the reverse of the list
+		// 2. add suffix 0 to original list, add suffix 1 to reversed list
+		// 3. concatenate two lists
+		public static ArrayList<Integer> grayCode(int n) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			ArrayList<StringBuilder> res = new ArrayList<StringBuilder>();
+			if (n == 0) {
+				ArrayList<Integer> zero = new ArrayList<Integer>();
+				zero.add(0);
+				return zero;
+			}
+
+			res.add(new StringBuilder().append(0));
+			res.add(new StringBuilder().append(1));
+
+			// generate gray codes
+			for (int i = 0; i < n - 1; ++i) {
+				ArrayList<StringBuilder> reflectListWithOne = new ArrayList<StringBuilder>();
+				for (int j = res.size() - 1; j >= 0; --j) {
+					StringBuilder sb = new StringBuilder(res.get(j).toString());
+					reflectListWithOne.add(sb.append('1'));
+				}
+				for (int j = 0; j < res.size(); ++j) {
+					StringBuilder sb = res.get(j);
+					sb.append('0');
+				}
+				res.addAll(reflectListWithOne);
+			}
+			// convert to integer
+			ArrayList<Integer> grayCodes = new ArrayList<Integer>();
+			for (int i = 0; i < res.size(); ++i) {
+				String str = res.get(i).toString();
+				int val = 0;
+				int base = 1;
+				for (int d = 0; d < str.length(); ++d) { // actually reverse the
+															// order is also a
+															// valid sequences
+					val += base * (str.charAt(d) - '0');
+					base <<= 1;
+				}
+				grayCodes.add(val);
+			}
+
+			return grayCodes;
+		}
+	}
 
 }

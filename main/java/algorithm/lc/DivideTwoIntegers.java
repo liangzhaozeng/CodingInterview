@@ -12,14 +12,14 @@ public class DivideTwoIntegers {
 		public int divide(int dividend, int divisor) {
 			// Start typing your Java solution below
 			// DO NOT write main() function
-			if (divisor == 0) {
+			if (divisor == 0) {  // special case
 				return 0;
 			}
-			int sign = (dividend > 0 != divisor > 0) ? -1 : 1;
-			if (divisor == Integer.MIN_VALUE) {
+			int sign = (dividend > 0 != divisor > 0) ? -1 : 1;  // what is sign can be
+			if (divisor == Integer.MIN_VALUE) {                 // edge case 
 				return dividend == Integer.MIN_VALUE ? 1 : 0;
 			}
-			if (dividend == Integer.MIN_VALUE) {
+			if (dividend == Integer.MIN_VALUE) {                // edge case
 				return sign
 						+ divide(dividend - (divisor < 0 ? divisor : -divisor),
 								divisor);

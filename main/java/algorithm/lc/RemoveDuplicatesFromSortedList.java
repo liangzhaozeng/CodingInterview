@@ -22,7 +22,29 @@ public class RemoveDuplicatesFromSortedList {
 
   public class Solution {
     // three pointer to point to previous node, current node, and next node
-    public ListNode deleteDuplicates(ListNode head) {
+    
+	  public ListNode deleteDuplicates(ListNode head) {
+		  ListNode fakeHead = new ListNode(head.val +1);
+		  fakeHead.next = head;
+		  
+		  recur(fakeHead, head);
+		  return fakeHead.next;
+		  
+	  }
+	  
+	  private void recur(ListNode pre, ListNode cur) {
+		  if (cur == null) {
+			  return;
+		  }
+		  if (pre.val == cur.val) {
+			  pre.next = cur.next;
+			  recur(pre, pre.next);
+		  } else {
+			  recur(pre.next, cur.next);
+		  }
+	  }
+	  
+	  public ListNode deleteDuplicates2(ListNode head) {
       // Start typing your Java solution below
       // DO NOT write main() function
       if (head == null) {

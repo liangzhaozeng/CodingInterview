@@ -21,55 +21,93 @@ package algorithm.lc;
 // O(1) space, O(n) time
 public class ReverseNodesInKGroup {
 
-  public static class ListNode {
-    int val;
-    ListNode next;
+	public static class ListNode {
+		int val;
+		ListNode next;
 
-    ListNode(int x) {
-      val = x;
-      next = null;
-    }
-  }
+		ListNode(int x) {
+			val = x;
+			next = null;
+		}
+	}
 
-  public class Solution {
-    // reverse list in each local group, maintain the connection between
-    // previous group to current group
-    public ListNode reverseKGroup(ListNode head, int k) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      ListNode fakeHead = new ListNode(0);
-      fakeHead.next = head;
+	public static ListNode reverseKGroup(ListNode head, int k) {
+		if (k < 2 || head == null || head.next == null)
+			return head;
+		ListNode nextGroup = head;
+		for (int i = 0; i < k; i++) {
+			if (nextGroup != null)
+				nextGroup = nextGroup.next;
+			else
+				return head;
+		}
 
-      ListNode cur = head;
-      ListNode prevGroupTail = fakeHead;
-      while (cur != null) {
-        // find the tail of current group
-        int count = 1;
-        ListNode groupHead = cur;
-        ListNode groupTail = cur;
-        while (groupTail.next != null && count < k) {
-          groupTail = groupTail.next;
-          ++count;
-        }
-        if (count < k) {
-          prevGroupTail.next = groupHead;
-          break; // reach the end of list
-        }
-        // reverse group
-        ListNode groupPrev = null;
-        for (int i = 0; i < k; ++i) {
-          ListNode next = cur.next;
-          cur.next = groupPrev;
-          groupPrev = cur;
-          cur = next;
-        }
-        // update inter-group links
-        prevGroupTail.next = groupTail;
-        prevGroupTail = groupHead;
-      }
-      
-      return fakeHead.next;
-    }
-  }
+		ListNode newNextGroup = reverseKGroup(nextGroup, k);
+		ListNode prev = null;
+		ListNode cur = head;
+		while (cur != nextGroup) {
+			ListNode next = cur.next;
+			cur.next = (prev != null) ? prev : newNextGroup;
+			prev = cur;
+			cur = next;
+		}
+		return prev;
+	}
 
+	public static void main(String[] args) {
+		ListNode n1 = new ListNode(1);
+		ListNode n2 = new ListNode(2);
+		ListNode n3 = new ListNode(3);
+		ListNode n4 = new ListNode(4);
+		ListNode n5 = new ListNode(5);
+		ListNode n6 = new ListNode(6);
+		ListNode n7 = new ListNode(7);
+		ListNode n8 = new ListNode(8);
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n4;
+		n4.next = n5;
+		n5.next = n6;
+		n6.next = n7;
+		n7.next = n8;
+		reverseKGroup(n1, 3);
+
+	}
+
+	public ListNode reverseKGroup2(ListNode head, int k) {
+		// Start typing your Java solution below
+		// DO NOT write main() function
+		ListNode fakeHead = new ListNode(0);
+		fakeHead.next = head;
+
+		ListNode cur = head;
+		ListNode prevGroupTail = fakeHead;
+		while (cur != null) {
+			// find the tail of current group
+			int count = 1;
+			ListNode groupHead = cur;
+			ListNode groupTail = cur;
+			while (groupTail.next != null && count < k) {
+				groupTail = groupTail.next;
+				++count;
+			}
+			if (count < k) {
+				prevGroupTail.next = groupHead;
+				break; // reach the end of list
+			}
+			// reverse group
+			ListNode groupPrev = null;
+			for (int i = 0; i < k; ++i) {
+				ListNode next = cur.next;
+				cur.next = groupPrev;
+				groupPrev = cur;
+				cur = next;
+			}
+			// update inter-group links
+			prevGroupTail.next = groupTail;
+			prevGroupTail = groupHead;
+		}
+
+		return fakeHead.next;
+	}
 }
