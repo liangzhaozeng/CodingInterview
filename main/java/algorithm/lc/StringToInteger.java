@@ -23,41 +23,46 @@ package algorithm.lc;
  */
 public class StringToInteger {
 
-  // O(1) space, O(n) time
-  public class Solution {
-    public int atoi(String str) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      str = str.trim();
-      if (str.length() == 0) {
-        return 0;
-      }
+	// O(1) space, O(n) time
+	public class Solution {
+		public int atoi(String str) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			str = str.trim();
+			if (str.length() == 0) {
+				return 0;
+			}
 
-      int sign = 1;
-      if (str.charAt(0) == '+' || str.charAt(0) == '-') {
-        sign = str.charAt(0) == '-' ? -1 : 1;
-        str = str.substring(1);
-      }
+			
+			
+			
+			
+			
+			int sign = 1;
+			if (str.charAt(0) == '+' || str.charAt(0) == '-') {
+				sign = str.charAt(0) == '-' ? -1 : 1;
+				str = str.substring(1);
+			}
 
-      int res = 0;
-      int max = (sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
-      for (int i = 0; i < str.length(); ++i) {
-        char ch = str.charAt(i);
-        if (ch < '0' || ch > '9') {
-          return res;
-        }
-        int digit = ch - '0';
-        // check overflow
-        if (sign == 1 && (max - digit) / 10 < res) {
-          return max;
-        } else if (sign == -1 && (max + digit) / 10 > res) {
-          return max;
-        }
+			int res = 0;
+			int max = (sign == -1 ? Integer.MIN_VALUE : Integer.MAX_VALUE);
+			for (int i = 0; i < str.length(); ++i) {
+				char ch = str.charAt(i);
+				if (ch < '0' || ch > '9') {
+					return res;
+				}
+				int digit = ch - '0';
+				// check overflow
+				if (sign == 1 && (max - digit) / 10 < res) {
+					return max;
+				} else if (sign == -1 && (max + digit) / 10 > res) {
+					return max;
+				}
 
-        res = res * 10 + sign * digit;
-      }
-      return res;
-    }
-  }
+				res = res * 10 + sign * digit;
+			}
+			return res;
+		}
+	}
 
 }

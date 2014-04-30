@@ -74,12 +74,12 @@ public class DFS {
 		while (!stack.isEmpty()) {
 			int vertex = stack.pop();
 			if (!visited[vertex]) {
-				System.out.print(vertex + "  ");
+				System.out.println("Visiting " + vertex + "  ");
 				visited[vertex] = true;
 
 				for (int i = 0; i < graph.adj.get(vertex).size(); i++) {
 					int newVertex = graph.adj.get(vertex).get(i);
-
+					System.out.println("Pushing  " + newVertex + " into stack ");
 					stack.push(newVertex);
 
 				}

@@ -15,43 +15,43 @@ import java.util.Stack;
  */
 public class SimplifyPath {
 
-  /**
-   * O(n) space, O(n) time.
-   * 
-   */
-  public class Solution {
-    public String simplifyPath(String path) {
-      // IMPORTANT: Please reset any member data you declared, as
-      // the same Solution instance will be reused for each test case.
-      if (path == null) {
-        return "/";
-      }
-      Stack<String> stack = new Stack<String>();
-      String[] tokens = path.split("/");
-      for (String token : tokens) {
-        if (token.equals(".") || token.length() == 0) {
-          // ignore
-        } else if (token.equals("..")) {
-          if (!stack.isEmpty()) {
-            stack.pop();
-          }
-        } else {
-          stack.push(token);
-        }
-      }
+	/**
+	 * O(n) space, O(n) time.
+	 * 
+	 */
+	public class Solution {
+		public String simplifyPath(String path) {
+			// IMPORTANT: Please reset any member data you declared, as
+			// the same Solution instance will be reused for each test case.
+			if (path == null) {
+				return "/";
+			}
+			Stack<String> stack = new Stack<String>();
+			String[] tokens = path.split("/");
+			for (String token : tokens) {
+				if (token.equals(".") || token.length() == 0) {
+					// ignore
+				} else if (token.equals("..")) {
+					if (!stack.isEmpty()) {
+						stack.pop();
+					}
+				} else {
+					stack.push(token);
+				}
+			}
 
-      if (stack.isEmpty()) {
-        return "/";
-      }
+			if (stack.isEmpty()) {
+				return "/";
+			}
 
-      StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 
-      while (!stack.isEmpty()) {
-        sb.insert(0, stack.pop());
-        sb.insert(0, '/');
-      }
-      return sb.toString();
-    }
-  }
+			while (!stack.isEmpty()) {
+				sb.insert(0, stack.pop());
+				sb.insert(0, '/');
+			}
+			return sb.toString();
+		}
+	}
 
 }
