@@ -25,6 +25,18 @@ public class BinaryTreeMaximumPathSum {
       val = x;
     }
   }
+  
+  /*
+  此题甚难。后来看了参考才做出来的。
+
+  基本的思路就是，在递归中计算包含该root的最大值并更新至max[0]（Java无法按引用传，就只能建立一个数组or something）。
+
+  包含该root的最大值有如下几种可能：1.root本身；2.root和左子树中一条路径；3.root和右子树中一条路径；4.左子树一条路径和root和右子树一条路径。其中取最大就可更新至max[0]
+
+  其中1，2，3可用来计算上一级的root的最大值，所以要传回去。
+
+  最终，对于最上层的root来说，数内的最大路径不一定要经过根，但由于每个节点都遍历到，其最大值已经存在max[0]里面了。
+  */
 
   public class Solution {
     public int maxPathSum(TreeNode root) {
