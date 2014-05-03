@@ -1,5 +1,6 @@
 package algorithm.lc;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -34,6 +35,28 @@ public class BinaryTreeLevelOrderTraversal {
   }
 
   public class Solution {
+	 
+	  public ArrayList<ArrayList<Integer>> levelOrderR(TreeNode root) {
+		  
+		  ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+		  
+		  traverse(root, 1, res);
+		
+		  return res;
+		  
+	  }
+	  
+	  void traverse(TreeNode root, int level,  ArrayList<ArrayList<Integer>> res) {
+		  if (root == null) return ;
+		  if (level > res.size()) 
+			  res.add(new ArrayList<Integer>());
+		  res.get(level-1).add(root.val);
+		  traverse(root.left, level +1, res);
+		  traverse(root.right, level +1, res);
+		  
+	  }
+	  
+	  
     public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
       // Start typing your Java solution below
       // DO NOT write main() function

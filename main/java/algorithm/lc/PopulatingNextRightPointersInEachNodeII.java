@@ -30,6 +30,26 @@ public class PopulatingNextRightPointersInEachNodeII {
 		}
 	}
 
+	public void connect(TreeLinkNode root) {
+		if (root == null)
+			return;
+		TreeLinkNode fakeNode = new TreeLinkNode(-1);
+		TreeLinkNode cur = root;
+		TreeLinkNode prev = fakeNode;
+		while (cur != null) {
+			if (cur.left != null) {
+				prev.next = cur.left;
+				prev = prev.next;
+			}
+			if (cur.right != null) {
+				prev.next = cur.right;
+				prev = prev.next;
+			}
+			cur = cur.next;
+		}
+		connect(fakeNode.next);
+	}
+
 	public class Solutionq2 {
 		public void connect(TreeLinkNode root) {
 			if (root == null)
@@ -98,17 +118,14 @@ public class PopulatingNextRightPointersInEachNodeII {
 				root.left.next = root.right;
 			}
 			if (root.next != null) {
-				TreeLinkNode nextStart = root.right == null ? root.left
-						: root.right;
+				TreeLinkNode nextStart = root.right == null ? root.left : root.right;
 				if (nextStart != null) {
 					TreeLinkNode nextParent = root.next;
-					while (nextParent != null && nextParent.left == null
-							&& nextParent.right == null) {
+					while (nextParent != null && nextParent.left == null && nextParent.right == null) {
 						nextParent = nextParent.next;
 					}
 					if (nextParent != null) {
-						nextStart.next = nextParent.left != null ? nextParent.left
-								: nextParent.right;
+						nextStart.next = nextParent.left != null ? nextParent.left : nextParent.right;
 					}
 				}
 			}

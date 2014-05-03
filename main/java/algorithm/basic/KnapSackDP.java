@@ -1,6 +1,7 @@
 package algorithm.basic;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class KnapSackDP {
 
@@ -14,8 +15,32 @@ static  int counter = 0;
 // int weights[] = array with the weights of all items
 // int values[] = array with the values of all items
 	
+static int minNumber = Integer.MAX_VALUE;
+	public static int mincoins(int[] values, int target) {
 
+		int result = 0;
+		
+		Arrays.sort(values);
+		
+		
+		
+		
+		
+		return result;
+		
+	} 
 	
+	public  int select(int[] values, int pos, int target, int number) {
+		if (target == 0)
+		    return number;
+		
+		for (int i = pos; i < values.length; i ++) {
+			if   (values[i] <= target) {
+			return 	select(values, i + 1, target - values[i], number +1 );
+			}
+		}
+		return -1;
+	}
 	
 	static int knapsack(int index, int size, int weights[],int values[], int[][] matrix,int[][] picks){
 	    counter ++;

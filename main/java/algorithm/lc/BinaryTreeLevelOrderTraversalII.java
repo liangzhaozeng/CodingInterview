@@ -11,11 +11,7 @@ import java.util.Stack;
  * 
  * For example: Given binary tree {3,9,20,#,#,15,7},
  * 
- *       3 
- *      / \ 
- *     9  20 
- *    / \ 
- *   15  7 
+ * 3 / \ 9 20 / \ 15 7
  * 
  * return its bottom-up level order traversal as:
  * 
@@ -25,54 +21,85 @@ import java.util.Stack;
 // O(n) space, O(n) time
 public class BinaryTreeLevelOrderTraversalII {
 
-  public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+	public class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
 
-    TreeNode(int x) {
-      val = x;
-    }
-  }
+		TreeNode(int x) {
+			val = x;
+		}
+	}
 
-  public class Solution {
-    // use a stack to store the level top-down
-    public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      Stack<ArrayList<Integer>> stack = new Stack<ArrayList<Integer>>();
+	public class Solution {
 
-      Queue<TreeNode> queue = new LinkedList<TreeNode>();
-      if (root != null) {
-        queue.add(root);
-      }
-      ArrayList<Integer> curLevel = new ArrayList<Integer>();
-      ArrayList<TreeNode> nextLevel = new ArrayList<TreeNode>();
+		public ArrayList<ArrayList<Integer>> levelOrderBottom2(TreeNode root) {
+			ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+			if (root == null)
+				return result;
+			Queue<TreeNode> queue = new LinkedList<TreeNode>();
+			queue.add(root);
+			queue.add(null);
+			ArrayList<Integer> level = new ArrayList<Integer>();
+			while (!queue.isEmpty()) {
+				TreeNode cur = queue.poll();
+				if (cur != null) {
+					level.add(cur.val);
+					if (cur.left != null) {
+						queue.add(cur.left);
+					}
+					if (cur.right != null) {
+						queue.add(cur.right);
+					}
+				} else {
+					result.add(0, level);
 
-      while (!queue.isEmpty()) {
-        // pop one level of nodes per time
-        while (!queue.isEmpty()) {
-          TreeNode node = queue.poll();
-          curLevel.add(node.val);
-          if (node.left != null) {
-            nextLevel.add(node.left);
-          }
-          if (node.right != null) {
-            nextLevel.add(node.right);
-          }
-        }
-        stack.push(curLevel);
-        curLevel = new ArrayList<Integer>();
-        queue.addAll(nextLevel);
-        nextLevel.clear();
-      }
+					level = new ArrayList<Integer>();
+					if (!queue.isEmpty())
+						queue.add(null);
+				}
+			}
+			return result;
 
-      ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-      while (!stack.isEmpty()) {
-        res.add(stack.pop());
-      }
-      return res;
-    }
-  }
+		}
+
+		// use a stack to store the level top-down
+		public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			Stack<ArrayList<Integer>> stack = new Stack<ArrayList<Integer>>();
+
+			Queue<TreeNode> queue = new LinkedList<TreeNode>();
+			if (root != null) {
+				queue.add(root);
+			}
+			ArrayList<Integer> curLevel = new ArrayList<Integer>();
+			ArrayList<TreeNode> nextLevel = new ArrayList<TreeNode>();
+
+			while (!queue.isEmpty()) {
+				// pop one level of nodes per time
+				while (!queue.isEmpty()) {
+					TreeNode node = queue.poll();
+					curLevel.add(node.val);
+					if (node.left != null) {
+						nextLevel.add(node.left);
+					}
+					if (node.right != null) {
+						nextLevel.add(node.right);
+					}
+				}
+				stack.push(curLevel);
+				curLevel = new ArrayList<Integer>();
+				queue.addAll(nextLevel);
+				nextLevel.clear();
+			}
+
+			ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+			while (!stack.isEmpty()) {
+				res.add(stack.pop());
+			}
+			return res;
+		}
+	}
 
 }

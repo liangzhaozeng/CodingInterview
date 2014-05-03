@@ -51,7 +51,7 @@ public class LongestValidParenthesis {
 		    }  
 		    return max;  
 		  }  
-	  }
+	  
 	  
 	  
 	  public int longestValidParentheses(String s) {
