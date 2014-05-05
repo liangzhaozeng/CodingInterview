@@ -22,6 +22,43 @@ import java.util.Set;
 // O(2^n) space, O(2^n) time
 public class SubsetsII {
 
+	 public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
+	        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+	        if (num.length ==0) {
+	            ArrayList<Integer> empty = new ArrayList<Integer>();
+	            result.add(empty);
+	        } else {
+	            Arrays.sort(num);
+	          result =    DFS(num.length, num);
+	        }
+	        return result;
+	    }
+	    
+	    public ArrayList<ArrayList<Integer>> DFS(int length, int[] num){
+	          ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+	        if (length == 1) {
+	            result.add(new ArrayList<Integer>());
+	            ArrayList<Integer> oneElement = new ArrayList<Integer>();
+	            oneElement.add(num[0]);
+	            result.add(oneElement);
+	    
+	        }else {
+	            ArrayList<ArrayList<Integer>> preRes = DFS(length -1, num);
+	            HashSet <ArrayList<Integer>> set = new HashSet <ArrayList<Integer>>();
+	            for (ArrayList<Integer> temp : preRes) {
+	                
+	                 if (set.add(temp) ) result.add(temp);
+	                ArrayList<Integer> newTemp = new ArrayList<Integer>(temp);
+	                newTemp.add(num[length-1]);
+	               
+	                if (set.add(newTemp) ) result.add(newTemp);
+	            }
+	            
+	        }
+	        return result;
+	    }	
+	
+	
   public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
       // Start typing your Java solution below

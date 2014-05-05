@@ -11,8 +11,7 @@ package algorithm.lc;
  */
 public class FirstMissingPositive {
 
-  //O(n) space, O(n) time
-  public static class Solution {
+
     // if size of A is n, create an boolean array with size n + 1,
     // the nth elements indicate whether the number n + 1 appears
     public int firstMissingPositive(int[] A) {
@@ -33,12 +32,36 @@ public class FirstMissingPositive {
 
       return exists.length;
     }
+ 
+  
+  
+  public int firstMissingPositive2(int[] A) {
+      // Start typing your Java solution below
+      // DO NOT write main() function
+    bucketSort(A);
+    for (int i = 0; i <A.length; i ++) {
+    	if (A[i]!= (i +1))
+    		return i +1;
+    
+    }
+	return A.length +1;
   }
   
-  // O(1) space, O(n) time
-  // switch each val to appropriate position A[val - 1]
-  public class Solution2 {
-    public int firstMissingPositive(int[] A) {
+  public void bucketSort(int[] A){
+	  for (int i = 0; i <A.length; i ++) {
+		  while (A[i] != i +1) {
+			  if (A[i] <=0 || A[i]> A.length || A[i] == A[A[i] -1])
+				  break;
+			  int temp = A[i];
+			  A[i]= A[A[i]-1];
+			  A[A[i-1]] = temp;
+		  }
+	  }
+	  
+  }
+
+
+    public int firstMissingPositive3(int[] A) {
           // Note: The Solution object is instantiated only once and is reused by each test case.
       int i = 0;
       while (i < A.length) {
@@ -63,6 +86,6 @@ public class FirstMissingPositive {
       }
       return i + 1;
     }
-  }
+ 
 
 }

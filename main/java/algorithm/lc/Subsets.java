@@ -21,6 +21,24 @@ import java.util.Set;
 // O(2^n) space, O(2^n) time
 public class Subsets {
 
+	public ArrayList<ArrayList<Integer>> subsets4(int[] S) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> current = new ArrayList<Integer> ();
+        result.add(current);
+        Arrays.sort(S);
+        for (int i = 0; i < S.length; i ++) {
+            ArrayList<ArrayList<Integer>> newResult = new ArrayList<ArrayList<Integer>> (result);
+            for (ArrayList<Integer> sub:result) {
+                ArrayList<Integer> newSub = new ArrayList<Integer>(sub);
+                newSub.add(S[i]);
+                newResult.add(newSub);
+            }
+            result = newResult;
+        }
+        return result;
+    }
+	
+	
   public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
       // Start typing your Java solution below
