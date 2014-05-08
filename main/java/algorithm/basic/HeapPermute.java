@@ -1,5 +1,6 @@
 package algorithm.basic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class HeapPermute {
@@ -11,6 +12,9 @@ public class HeapPermute {
 	public void permute(int[] v, int n) {
 		if (n == 1) {
 			System.out.println(Arrays.toString(v));
+		  ArrayList<Integer> result = new ArrayList<Integer>();
+		  result.s
+
 		} else {
 			for (int i = 0; i < n; i++) {
 				permute(v, n-1);

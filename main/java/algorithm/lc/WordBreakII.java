@@ -17,7 +17,7 @@ public class WordBreakII {
 		public ArrayList<String> wordBreakII(String s, Set<String> dict) {
 			int len = s.length();
 
-			boolean f[] = new boolean[len + 1]; // indicate whether there is a
+			boolean[] f = new boolean[len + 1]; // indicate whether there is a
 												// break point
 
 			ArrayList<ArrayList<Integer>> prev = new ArrayList<ArrayList<Integer>>();

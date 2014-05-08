@@ -9,5 +9,12 @@ public class MaxOutCome {
 		// TODO Auto-generated method stub
 
 	}
-
+   public int[] maxOutCome(int[] A, int[] B, int n) {
+	   int[] result = new int[n];
+	   int cout = n/2;
+	   
+	   
+	 return result;
+	   
+   }
 }
