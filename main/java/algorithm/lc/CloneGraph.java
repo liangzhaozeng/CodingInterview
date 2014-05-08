@@ -64,8 +64,7 @@ public class CloneGraph {
 					if (map.containsKey(n1)) {
 						map.get(nodeInQueue).neighbors.add(map.get(n1));
 					} else {
-						UndirectedGraphNode n1clone = new UndirectedGraphNode(
-								n1.label);
+						UndirectedGraphNode n1clone = new UndirectedGraphNode(n1.label);
 						map.get(nodeInQueue).neighbors.add(n1clone);
 						map.put(n1, n1clone);
 						queue.offer(n1);
@@ -87,8 +86,7 @@ public class CloneGraph {
 			return copy(node, visited);
 		}
 
-		private UndirectedGraphNode copy(UndirectedGraphNode node,
-				Map<Integer, UndirectedGraphNode> visited) {
+		private UndirectedGraphNode copy(UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> visited) {
 			if (node == null) {
 				return null;
 			}
