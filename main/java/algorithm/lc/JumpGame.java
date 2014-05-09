@@ -33,6 +33,18 @@ public class JumpGame {
       }
       return false;
     }
+    
+    
+    public boolean canJump2(int[] A) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        int[] dp = new int[A.length];
+        dp[0] = 0;
+        for (int i = 1; i < A.length; i ++){
+        	dp[i]= Math.max(dp[i-1], A[i-1])-1;
+        }
+        return dp[A.length-1]>=0;
+    }
   }
 
 }

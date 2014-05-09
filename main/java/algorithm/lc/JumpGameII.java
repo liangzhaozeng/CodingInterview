@@ -17,7 +17,29 @@ package algorithm.lc;
  */
 // O(1) space, O(n^2) time
 public class JumpGameII {
-
+   public int jump(int[] A){
+	   int step = 0;
+	   int left = 0;
+	   int right = 0;
+	   int n = A.length;
+	   
+	   if (n == 1) return 0;
+	   
+	   while (left <= right) {
+		   step ++;
+		   int oldRight = right;
+		   for (int i = left; i <= oldRight; i ++) {
+			   int newRight = i + A[i];
+			   if (newRight >= n-1) return step;
+			   if (newRight > right) right = newRight;
+		   }
+		   left = oldRight +1;
+	   }
+	   
+	   
+	   return 0;
+   }
+	
   public class Solution {
     // if A[i] cannot be visited, then for all j > i, A[j] cannot be visited
     // so we can safely use greedy algorithm, find the largest step each time
@@ -41,4 +63,6 @@ public class JumpGameII {
     }
   }
 
+  
+  
 }

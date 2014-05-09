@@ -13,7 +13,7 @@ public class HeapPermute {
 		if (n == 1) {
 			System.out.println(Arrays.toString(v));
 		  ArrayList<Integer> result = new ArrayList<Integer>();
-		  result.s
+		 
 
 		} else {
 			for (int i = 0; i < n; i++) {
