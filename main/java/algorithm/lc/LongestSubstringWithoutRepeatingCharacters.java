@@ -13,27 +13,27 @@ import java.util.Map;
 // O(n) space, O(nlgn) time
 public class LongestSubstringWithoutRepeatingCharacters {
 
-  public class Solution {
-    // two pointers with an tree map to store all the visited characters
-    public int lengthOfLongestSubstring(String s) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      Map<Character, Integer> map = new HashMap<Character, Integer>();
-      int maxLen = 0;
-      int start = 0, end = 0;
-      while (end < s.length()) {
-        char ch = s.charAt(end);
-        Integer pos = map.get(ch);
-        if (pos != null && pos >= start) { // duplicate
-          start = pos + 1;
-        } else {
-          maxLen = Math.max(maxLen, end - start + 1);
-        }
-        map.put(ch, end); // update map
-        ++end;
-      }
-      return maxLen;
-    }
-  }
+	public class Solution {
+		// two pointers with an tree map to store all the visited characters
+		public int lengthOfLongestSubstring(String s) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			Map<Character, Integer> map = new HashMap<Character, Integer>();
+			int maxLen = 0;
+			int start = 0, end = 0;
+			while (end < s.length()) {
+				char ch = s.charAt(end);
+				Integer pos = map.get(ch);
+				if (pos != null && pos >= start) { // duplicate
+					start = pos + 1;
+				} else {
+					maxLen = Math.max(maxLen, end - start + 1);
+				}
+				map.put(ch, end); // update map
+				++end;
+			}
+			return maxLen;
+		}
+	}
 
 }
