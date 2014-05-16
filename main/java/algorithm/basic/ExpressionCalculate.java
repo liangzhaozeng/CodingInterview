@@ -15,7 +15,9 @@ public class ExpressionCalculate {
    * @return
    */
   public double calculate(String expression) {
-    StringBuilder sb = new StringBuilder();
+    
+	StringBuilder sb = new StringBuilder();
+    
     Stack<Character> stack = new Stack<Character>();
     
     for (int i = 0; i < expression.length(); ++i) {

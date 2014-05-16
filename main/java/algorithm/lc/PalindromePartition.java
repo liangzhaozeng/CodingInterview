@@ -16,6 +16,45 @@ import java.util.Collections;
  */
 public class PalindromePartition {
 
+	public ArrayList<ArrayList<String>> partition2(String s) {
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		int length = s.length();
+		boolean[][] dp = new boolean[length][length];
+		for (int i = 0; i < length; i++) {
+			dp[i][i] = true;
+		}
+		for (int l = 2; l <= length; l++) {
+			for (int startPos = 0; startPos + l - 1 <= length - 1; startPos++) {
+				if (l == 2 && s.charAt(startPos) == s.charAt(startPos + l - 1))
+					dp[startPos][startPos + l - 1] = true;
+				else if (s.charAt(startPos) == s.charAt(startPos + l - 1)
+						&& dp[startPos + 1][startPos + l - 2])
+					dp[startPos][startPos + l - 1] = true;
+			}
+		}
+		ArrayList<String> current = new ArrayList<String>();
+		generate(result, dp, s, 0, current);
+		return result;
+	}
+
+	private void generate(ArrayList<ArrayList<String>> result, boolean[][] dp,
+			String s, int curPos, ArrayList<String> current) {
+		if (curPos == s.length()) {
+			ArrayList<String> temp = new ArrayList<String>(current);
+			// Collections.reserse(temp);
+			result.add(temp);
+			return;
+		} else {
+			for (int i = curPos; i < s.length(); i++) {
+				if (dp[curPos][i]) {
+					current.add(s.substring(curPos, i + 1));
+					generate(result, dp, s, i + 1, current);
+					current.remove(current.size() - 1);
+				}
+			}
+		}
+	}
+
 	public ArrayList<ArrayList<String>> partition(String s) {
 		int[][] dp = new int[s.length()][s.length()];
 
