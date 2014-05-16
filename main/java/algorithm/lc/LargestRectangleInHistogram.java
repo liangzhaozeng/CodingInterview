@@ -22,7 +22,7 @@ public class LargestRectangleInHistogram {
 
 		public int largestRA(int[] height) {
 			int area = 0;
- 
+
 			for (int i = 0; i < height.length; i++) {
 
 				if (i + 1 < height.length && height[i] <= height[i + 1])

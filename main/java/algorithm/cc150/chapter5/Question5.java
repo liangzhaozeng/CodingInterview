@@ -7,15 +7,15 @@ package algorithm.cc150.chapter5;
  */
 public class Question5 {
 
-  public int convertSteps(int A, int B) {
-    // write implementation here.
-    int dif = A ^ B;
-    int numOf1 = 0;
-    while (dif > 0) {
-      ++numOf1;
-      dif &= dif - 1;
-    }
-    return numOf1;
-  }
+	public int convertSteps(int A, int B) {
+		// write implementation here.
+		int dif = A ^ B;
+		int numOf1 = 0;
+		while (dif > 0) {
+			++numOf1;
+			dif &= dif - 1;
+		}
+		return numOf1;
+	}
 
 }

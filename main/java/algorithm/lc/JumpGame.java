@@ -17,34 +17,33 @@ package algorithm.lc;
 // O(1) space, O(n) time
 public class JumpGame {
 
-  public class Solution {
-    // update the upper bound of reachable
-    public boolean canJump(int[] A) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      int pos = 0;
-      int reachable = 0;
-      while (pos <= reachable) {
-        reachable = Math.max(reachable, pos + A[pos]);
-        if (reachable >= A.length - 1) {
-          return true;
-        }
-        ++pos;
-      }
-      return false;
-    }
-    
-    
-    public boolean canJump2(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int[] dp = new int[A.length];
-        dp[0] = 0;
-        for (int i = 1; i < A.length; i ++){
-        	dp[i]= Math.max(dp[i-1], A[i-1])-1;
-        }
-        return dp[A.length-1]>=0;
-    }
-  }
+	public class Solution {
+		// update the upper bound of reachable
+		public boolean canJump(int[] A) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			int pos = 0;
+			int reachable = 0;
+			while (pos <= reachable) {
+				reachable = Math.max(reachable, pos + A[pos]);
+				if (reachable >= A.length - 1) {
+					return true;
+				}
+				++pos;
+			}
+			return false;
+		}
+
+		public boolean canJump2(int[] A) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			int[] dp = new int[A.length];
+			dp[0] = 0;
+			for (int i = 1; i < A.length; i++) {
+				dp[i] = Math.max(dp[i - 1], A[i - 1]) - 1;
+			}
+			return dp[A.length - 1] >= 0;
+		}
+	}
 
 }

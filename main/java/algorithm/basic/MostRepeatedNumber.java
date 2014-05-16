@@ -12,33 +12,33 @@ import java.util.Random;
  * 
  */
 public class MostRepeatedNumber {
-  
-  public static int mostRepeatedNumber(int[] vals) {
-    Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
 
-    int maxCount = 0;
-    List<Integer> candidates = new ArrayList<Integer>();
+	public static int mostRepeatedNumber(int[] vals) {
+		Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
 
-    for (int val : vals) {
-      Integer count = counts.get(val);
-      if (count == null) {
-        count = 0;
-      }
-      ++count; // update count
-      if (count > maxCount) { // empty candidates
-        candidates.clear();
-        candidates.add(val);
-        maxCount = count;
-      } else if (count == maxCount) {
-        candidates.add(val);
-      }
-      counts.put(val, count);
-    }
+		int maxCount = 0;
+		List<Integer> candidates = new ArrayList<Integer>();
 
-    Random rnd = new Random();
-    int rndIdx = rnd.nextInt(candidates.size());
+		for (int val : vals) {
+			Integer count = counts.get(val);
+			if (count == null) {
+				count = 0;
+			}
+			++count; // update count
+			if (count > maxCount) { // empty candidates
+				candidates.clear();
+				candidates.add(val);
+				maxCount = count;
+			} else if (count == maxCount) {
+				candidates.add(val);
+			}
+			counts.put(val, count);
+		}
 
-    return candidates.get(rndIdx);
-  }
-  
+		Random rnd = new Random();
+		int rndIdx = rnd.nextInt(candidates.size());
+
+		return candidates.get(rndIdx);
+	}
+
 }

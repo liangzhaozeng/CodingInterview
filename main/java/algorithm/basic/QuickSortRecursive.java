@@ -2,20 +2,17 @@ package algorithm.basic;
 
 public class QuickSortRecursive extends Sort {
 
-	
-	
-	
 	private static int findKth(Integer[] A, int k, int start, int end) {
-	    int pivot =split(A, start, end);
+		int pivot = split(A, start, end);
 
-	    if (pivot == k) {
-	      return A[pivot];
-	    } else if (pivot < k) { // find the (k - pivot)-th from the second half
-	      return findKth(A, k-pivot-1, pivot + 1, end);
-	    } else { // pivot > k, find the k-th from the first half
-	      return findKth(A, k, start, pivot - 1);
-	    }
-	  }
+		if (pivot == k) {
+			return A[pivot];
+		} else if (pivot < k) { // find the (k - pivot)-th from the second half
+			return findKth(A, k - pivot - 1, pivot + 1, end);
+		} else { // pivot > k, find the k-th from the first half
+			return findKth(A, k, start, pivot - 1);
+		}
+	}
 
 	private static <T extends Comparable<T>> int split(T[] list, int lo, int hi) {
 		int left = lo + 1;

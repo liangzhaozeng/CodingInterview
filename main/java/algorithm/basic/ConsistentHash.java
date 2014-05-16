@@ -10,8 +10,7 @@ public class ConsistentHash<T> {
 	private final int numberOfReplicas;
 	private final SortedMap<Integer, T> circle = new TreeMap<Integer, T>();
 
-	public ConsistentHash(HashFunction hashFunction, int numberOfReplicas,
-			Collection<T> nodes) {
+	public ConsistentHash(HashFunction hashFunction, int numberOfReplicas, Collection<T> nodes) {
 
 		this.hashFunction = hashFunction;
 		this.numberOfReplicas = numberOfReplicas;

@@ -6,11 +6,9 @@ public class Dijkstra {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int[][] graph = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
-				{ 4, 0, 8, 0, 0, 0, 0, 11, 0 }, { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-				{ 0, 0, 7, 0, 9, 14, 0, 0, 0 }, { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-				{ 0, 0, 4, 0, 10, 0, 2, 0, 0 }, { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
-				{ 8, 11, 0, 0, 0, 0, 1, 0, 7 }, { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+		int[][] graph = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 }, { 4, 0, 8, 0, 0, 0, 0, 11, 0 }, { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+				{ 0, 0, 7, 0, 9, 14, 0, 0, 0 }, { 0, 0, 0, 9, 0, 10, 0, 0, 0 }, { 0, 0, 4, 0, 10, 0, 2, 0, 0 },
+				{ 0, 0, 0, 14, 0, 2, 0, 1, 6 }, { 8, 11, 0, 0, 0, 0, 1, 0, 7 }, { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
 		int[] result = shortestPath(graph, 0);
 		for (int i = 0; i < result.length; i++)
 			System.out.println("Vertex " + i + "   " + result[i]);
@@ -64,10 +62,11 @@ public class Dijkstra {
 			for (int v = 0; v < size; v++)
 
 				// Update dist[v] only if is not in sptSet, there is an edge
-				// from u to v, and total weight of path from src to v through u is
+				// from u to v, and total weight of path from src to v through u
+				// is
 				// smaller than current value of dist[v]
 				if (!sptSet[v] && graph[u][v] != 0
-				//		&& dist[u] != Integer.MAX_VALUE
+				// && dist[u] != Integer.MAX_VALUE
 						&& dist[u] + graph[u][v] < dist[v])
 					dist[v] = dist[u] + graph[u][v];
 		}

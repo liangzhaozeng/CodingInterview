@@ -10,35 +10,32 @@ import java.util.Arrays;
  */
 public class ReplaceElemToGetSum {
 
-  public int replaceElemToGetSum(int[] arr, int sum) {
-    
-    Arrays.sort(arr);
-    int l = 0;
-    int r = arr[arr.length - 1];
-    
-    while (l < r) {
-      int k = (l + r) / 2;
-      int curSum = 0;
-      for (int val : arr) {
-        if (val < k) {
-          curSum += val;
-        }
-        else {
-          curSum += k;
-        }
-      }
-      if (curSum == sum) {
-        return k;
-      }
-      else if (curSum < sum) {
-        l = k;
-      }
-      else {
-        r = k;
-      }
-    }
-    
-    return l;
-  }
+	public int replaceElemToGetSum(int[] arr, int sum) {
+
+		Arrays.sort(arr);
+		int l = 0;
+		int r = arr[arr.length - 1];
+
+		while (l < r) {
+			int k = (l + r) / 2;
+			int curSum = 0;
+			for (int val : arr) {
+				if (val < k) {
+					curSum += val;
+				} else {
+					curSum += k;
+				}
+			}
+			if (curSum == sum) {
+				return k;
+			} else if (curSum < sum) {
+				l = k;
+			} else {
+				r = k;
+			}
+		}
+
+		return l;
+	}
 
 }

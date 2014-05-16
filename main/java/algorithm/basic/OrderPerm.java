@@ -31,8 +31,7 @@ public class OrderPerm {
 			}
 			D2[1] = D2[1].multiply(new BigInteger(String.valueOf(i)));
 			for (int m = 2; m <= i; m++) {
-				BigInteger tmp = D1[m - 1].multiply(new BigInteger(String
-						.valueOf(i)));
+				BigInteger tmp = D1[m - 1].multiply(new BigInteger(String.valueOf(i)));
 				D2[m] = tmp.divide(new BigInteger(String.valueOf(m)));
 			}
 			D1 = D2;
@@ -45,14 +44,17 @@ public class OrderPerm {
 	}
 
 	public static void main(String[] args) {
-		
-		  long start = System.currentTimeMillis();
-		  
-		  int n = 50; for(int i=1;i<=n;i++) { BigInteger count = OrderPerm.solve(i);
-		  System.out.format("count(n=%d): %d%n",i,count); } long end =
-		  System.currentTimeMillis(); double timeElapsed = (end-start)/1000.0;
-		  System.out.format("Time elapsed(sec): %.3f%n", timeElapsed);
-		 
+
+		long start = System.currentTimeMillis();
+
+		int n = 50;
+		for (int i = 1; i <= n; i++) {
+			BigInteger count = OrderPerm.solve(i);
+			System.out.format("count(n=%d): %d%n", i, count);
+		}
+		long end = System.currentTimeMillis();
+		double timeElapsed = (end - start) / 1000.0;
+		System.out.format("Time elapsed(sec): %.3f%n", timeElapsed);
 
 		Scanner cin = new Scanner(System.in);
 		while (cin.hasNextInt()) {

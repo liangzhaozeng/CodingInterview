@@ -3,8 +3,6 @@ package algorithm.basic;
 import java.util.Arrays;
 import java.util.Collections;
 
-
-
 // http://www.programminglogic.com/knapsack-problem-dynamic-programming-algorithm/
 public class KnapSackDP {
 
