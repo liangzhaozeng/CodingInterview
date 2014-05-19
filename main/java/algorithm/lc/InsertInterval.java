@@ -20,54 +20,52 @@ import java.util.Comparator;
  */
 public class InsertInterval {
 
-  public class Interval {
-    int start;
-    int end;
+	public class Interval {
+		int start;
+		int end;
 
-    Interval() {
-      start = 0;
-      end = 0;
-    }
+		Interval() {
+			start = 0;
+			end = 0;
+		}
 
-    Interval(int s, int e) {
-      start = s;
-      end = e;
-    }
-  }
+		Interval(int s, int e) {
+			start = s;
+			end = e;
+		}
+	}
 
-  // only one scan
-  public class Solution {
-    public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
-          // Start typing your Java solution below
-          // DO NOT write main() function
-      ArrayList<Interval> res = new ArrayList<Interval>();
-      int start = newInterval.start;
-      int end = newInterval.end;
-      boolean finished = false;
-      for (int i = 0; i < intervals.size(); ++i) {
-        Interval interval = intervals.get(i);
-        if (interval.end < start) {
-          res.add(interval);
-        }
-        else if (interval.start > end) { 
-          if (finished == false) { // new interval has not been added
-            res.add(new Interval(start, end));
-            finished = true;
-          }
-          res.add(interval);
-        }
-        else {
-          start = Math.min(interval.start, start);
-          end = Math.max(interval.end, end);
-        }
-      }
-      
-      if (finished == false) {
-        res.add(new Interval(start, end));
-      }
-      
-      return res;
-    }
-  }
+	// only one scan
+	public class Solution {
+		public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			ArrayList<Interval> res = new ArrayList<Interval>();
+			int start = newInterval.start;
+			int end = newInterval.end;
+			boolean finished = false;
+			for (int i = 0; i < intervals.size(); ++i) {
+				Interval interval = intervals.get(i);
+				if (interval.end < start) {  // case 1
+					res.add(interval);
+				} else if (interval.start > end) { // case 2
+					if (finished == false) { // new interval has not been added
+						res.add(new Interval(start, end));
+						finished = true;
+					}
+					res.add(interval);
+				} else {                     // case 3
+					start = Math.min(interval.start, start);
+					end = Math.max(interval.end, end);
+				}
+			}
+
+			if (finished == false) {
+				res.add(new Interval(start, end));
+			}
+
+			return res;
+		}
+	}
 
 }
