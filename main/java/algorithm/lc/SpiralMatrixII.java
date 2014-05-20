@@ -20,23 +20,47 @@ public class SpiralMatrixII {
 		int beginY = 0, endY = n - 1;
 		int num = 1;
 		while (true) {
-			for (int j = beginX; j <= endX; ++j)
+			System.out.println("Top ");
+			for (int j = beginX; j <= endX; ++j) {
+				System.out.print(num + "  ");
 				m[beginY][j] = num++;
+
+				
+			}
+			System.out.println("");
 			if (++beginY > endY)
 				break;
-
-			for (int i = beginY; i <= endY; ++i)
+			System.out.println("Right ");
+			for (int i = beginY; i <= endY; ++i) {
+				
+				System.out.print(num + "  ");
 				m[i][endX] = num++;
+			
+			}
+			System.out.println("");
 			if (beginX > --endX)
 				break;
 
-			for (int j = endX; j >= beginX; --j)
+			System.out.println("Botton ");
+			for (int j = endX; j >= beginX; --j) {
+				
+				System.out.print(num + "  ");
 				m[endY][j] = num++;
+
+				
+			}
+			System.out.println("");
 			if (beginY > --endY)
 				break;
-
-			for (int i = endY; i >= beginY; --i)
+			System.out.println("Left ");
+			for (int i = endY; i >= beginY; --i) {
+				
+				System.out.print(num + "  ");
 				m[i][beginX] = num++;
+
+				
+			}
+			System.out.println("");
 			if (++beginX > endX)
 				break;
 
@@ -57,12 +81,12 @@ public class SpiralMatrixII {
 				matrix[beginY][j] = num++;
 			if (++beginY > endY)
 				break;
-			
+
 			for (int i = beginY; i <= endY; ++i)
 				matrix[i][endX] = num++;
 			if (beginX > --endX)
 				break;
-			
+
 			for (int j = endX; j >= beginX; --j)
 				matrix[endY][j] = num++;
 			if (beginY > --endY)
@@ -79,6 +103,12 @@ public class SpiralMatrixII {
 		int[][] m = generateMatrix(4);
 		for (int i = 0; i < 4; i++)
 			for (int j = 0; j < 4; j++) {
+				System.out.print(m[i][j] + " ");
+			}
+		System.out.println("");
+		m = generateMatrix(3);
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
 				System.out.print(m[i][j] + " ");
 			}
 	}
