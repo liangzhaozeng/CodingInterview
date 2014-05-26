@@ -9,7 +9,7 @@ import java.util.Stack;
 public class TopologicSort {
 	public static class Graph {
 		
-		public int V; // number of the vertices
+	public int V; // number of the vertices
 		public ArrayList<ArrayList<Integer>> adj; // array of adjacency lists
 		/**
 		 * 

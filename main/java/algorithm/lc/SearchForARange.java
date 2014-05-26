@@ -123,10 +123,46 @@ public class SearchForARange {
 
 	}
 
+	public static int[] searchRange(int[] A, int target) {
+        int left = 0;
+        int right = A.length -1;
+        int mid = -1;
+        int[] result = {-1, -1};
+        boolean found = false;
+        while (left <= right) {
+            mid = left + (right-left)/2;
+            if ( A[mid] == target) {
+              found = true;    
+            }
+            
+            else if (A[mid] > target) {
+                right = mid -1;
+            } else {
+                left = mid +1;
+            }
+        }
+        
+     
+        
+        if  (found) {
+            left = mid;
+            while (A[left] ==  target) {
+                left --;
+            }
+            right = mid;
+             while (A[right] ==  target) {
+                right ++;
+            }
+            result[0] = left+1;
+            result[1] = right-1;
+        }
+        return result;
+    }
+	
 	public static void main(String[] args) {
 		Solution s = new Solution();
-		int[] A = { 1 };
-		int target = 1;
+		int[] A = { 2,2};
+		int target = 2;
 		int[] res = s.searchRange(A, target);
 		System.out.println(Arrays.toString(res));
 	}

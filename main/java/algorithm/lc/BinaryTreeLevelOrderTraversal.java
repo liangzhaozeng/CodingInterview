@@ -86,7 +86,8 @@ public class BinaryTreeLevelOrderTraversal {
         queue.addAll(nextLevel);
         nextLevel.clear();
       }
-
+     
+      Collections.reverse(res);
       return res;
     }
   }

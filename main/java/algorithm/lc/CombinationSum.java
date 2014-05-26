@@ -22,39 +22,66 @@ import java.util.Set;
  */
 public class CombinationSum {
 
-  public class Solution {
-    public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates,
-        int target) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      Set<ArrayList<Integer>> res = new HashSet<ArrayList<Integer>>();
-      int curIdx = 0;
-      ArrayList<Integer> cur = new ArrayList<Integer>();
-      int sum = 0;
-      Arrays.sort(candidates);
-      generate(candidates, target, res, curIdx, cur, sum);
-      return new ArrayList<ArrayList<Integer>>(res);
-    }
+	public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		if (candidates == null || candidates.length == 0)
+			return result;
+		Arrays.sort(candidates);
+		ArrayList<Integer> cur = new ArrayList<Integer>();
+		DFS(candidates, target, 0, cur, result);
+		return result;
+	}
 
-    private void generate(int[] candidates, int target,
-        Set<ArrayList<Integer>> res, int curIdx, ArrayList<Integer> cur, int sum) {
-      if (curIdx == candidates.length) {
-        if (sum == target) {
-          res.add(cur);
-        }
-        return;
-      }
-      int curVal = candidates[curIdx];
-      if (sum + curVal <= target) {
-        ArrayList<Integer> stay = new ArrayList<Integer>(cur);
-        stay.add(curVal);
-        generate(candidates, target, res, curIdx, stay, sum + curVal);
-        ArrayList<Integer> next = new ArrayList<Integer>(cur);
-        next.add(curVal);
-        generate(candidates, target, res, curIdx + 1, next, sum + curVal);
-      }
-      generate(candidates, target, res, curIdx + 1, cur, sum);
-    }
-  }
+	private void DFS(int[] candidates, int target, int curPos, ArrayList<Integer> cur,
+			ArrayList<ArrayList<Integer>> result) {
+		if (target == 0) {
+			ArrayList<Integer> newCur = new ArrayList<Integer>(cur);
+			result.add(newCur);
+			return;
+		} else {
+			for (int i = curPos; i < candidates.length; i++) {
+				if (target >= candidates[i]) {
+					cur.add(candidates[i]);
+					DFS(candidates, target - candidates[i], i, cur, result);
+					cur.remove(cur.size() - 1);
+				}
+			}
+			return;
+		}
+	}
+
+	public class Solution {
+		public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			Set<ArrayList<Integer>> res = new HashSet<ArrayList<Integer>>();
+			int curIdx = 0;
+			ArrayList<Integer> cur = new ArrayList<Integer>();
+			int sum = 0;
+			Arrays.sort(candidates);
+			generate(candidates, target, res, curIdx, cur, sum);
+			return new ArrayList<ArrayList<Integer>>(res);
+		}
+
+		private void generate(int[] candidates, int target, Set<ArrayList<Integer>> res, int curIdx,
+				ArrayList<Integer> cur, int sum) {
+			if (curIdx == candidates.length) {
+				if (sum == target) {
+					res.add(cur);
+				}
+				return;
+			}
+			int curVal = candidates[curIdx];
+			if (sum + curVal <= target) {
+				ArrayList<Integer> stay = new ArrayList<Integer>(cur);
+				stay.add(curVal);
+				generate(candidates, target, res, curIdx, stay, sum + curVal);
+				ArrayList<Integer> next = new ArrayList<Integer>(cur);
+				next.add(curVal);
+				generate(candidates, target, res, curIdx + 1, next, sum + curVal);
+			}
+			generate(candidates, target, res, curIdx + 1, cur, sum);
+		}
+	}
 
 }
