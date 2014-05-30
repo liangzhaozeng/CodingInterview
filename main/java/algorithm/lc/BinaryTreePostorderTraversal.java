@@ -20,7 +20,7 @@ public class BinaryTreePostorderTraversal {
 	}
 
 	/**
-	 * O(n) time, O(n) space.
+	 * O(n) time, O(n) space. 
 	 * 
 	 */
 

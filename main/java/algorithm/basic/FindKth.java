@@ -1,7 +1,90 @@
 package algorithm.basic;
 
 public class FindKth {
+	private int split(int[] list, int lo, int hi){
+		int left = lo +1;
+		int right = hi;
+		int pivot = list[lo];
+		
+		while (true) {
+			while (left <= right){
+				if (list[left] < pivot){
+					left ++;
+				} else {
+					break;
+				}
+			}
+			
+			while (right > left) {
+				if (list[right]< pivot){
+					break;
+				}else {
+					right --;
+				}
+			}
+			
+			if (left >= right)
+				break;
+		
+			int temp = list[left];
+			list[left]= list[right];
+			list[right] = temp;
+			
+			left ++;
+			right ++;
+		}
+		list[lo] = list[left -1];
+		list[left -1] = pivot;
+		return left -1;
+	}
+	
+	
+	private static <T extends Comparable<T>> int split(T[] list, int lo, int hi) {
+		int left = lo + 1;
+		int right = hi;
+		T pivot = list[lo];
 
+		while (true) {
+			while (left <= right) {
+				if (list[left].compareTo(pivot) < 0) {
+					left++;
+				} else {
+					break;
+				}
+			}
+
+			while (right > left) {
+				if (list[right].compareTo(pivot) < 0) {
+					break;
+				} else {
+					right--;
+				}
+			}
+
+			if (left >= right) {
+				break;
+			}
+
+			// swap left and right items
+			T temp = list[left];
+			list[left] = list[right];
+			list[right] = temp;
+			// advance each one step
+			left++;
+			right--;
+		}
+
+		// swap pivot with left-1 position
+		list[lo] = list[left - 1];
+		list[left - 1] = pivot;
+		// return the split point
+
+		return left - 1;
+	}
+
+	
+	
+	
 	public static void main(String[] args) {
 		int[] A = { 1, 4, 2, 5, 9, 5, 3 };
 		System.out.println(findKth(A, 3));

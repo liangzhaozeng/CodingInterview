@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//Algorithm/Reservoir\ Sampling.txt=UTF-8
+encoding//main/java/algorithm/basic/BitSetOperation.java=UTF-8
+encoding//main/java/algorithm/basic/HashMapImplementation.java=UTF-8
 encoding//main/java/algorithm/basic/SimpleBloomFilter.java=UTF-8
 encoding//main/java/algorithm/basic/graph/GraphConnectivity.java=UTF-8
 encoding//main/java/algorithm/lc/BinaryTreeMaximumPathSum.java=UTF-8
@@ -9,4 +11,7 @@ encoding//main/java/algorithm/lc/MaximumSubArray.java=UTF-8
 encoding//main/java/algorithm/lc/NQueens.java=UTF-8
 encoding//main/java/algorithm/lc/ScrambleString.java=UTF-8
 encoding//main/java/algorithm/lc/Subsets.java=UTF-8
+encoding//main/java/algorithm/lc/TextJustification.java=UTF-8
 encoding//main/java/interview/questions/IsPopOrder.java=UTF-8
+encoding//main/java/interview/questions/ListQuestion.java=UTF-8
+encoding//main/java/interview/questions/TreeQuestions.java=UTF-8
