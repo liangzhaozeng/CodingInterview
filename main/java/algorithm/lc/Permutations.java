@@ -13,7 +13,52 @@ import java.util.List;
  */
 // O(n!) space, O(n!) time, where n is the length of array
 public class Permutations {
+	
+	public static void permutation(String str) { 
+	    permutation("", str); 
+	}
 
+	private static void permutation(String prefix, String str) {
+	    int n = str.length();
+	    if (n == 0) System.out.println(prefix);
+	    else {
+	        for (int i = 0; i < n; i++)
+	            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
+	    }
+	}
+
+
+    public ArrayList<ArrayList<Integer>> permute2(int[] num) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if (num == null || num.length == 0) return result;
+        result= generate(num.length, num);
+        return result;
+    }
+    
+    private ArrayList<ArrayList<Integer>>  generate (int length, int[] num) {
+         ArrayList<ArrayList<Integer>> result = new  ArrayList<ArrayList<Integer>>();
+        
+        if (length == 1) {
+            ArrayList<Integer> cur = new ArrayList<Integer>();
+            cur.add(num[0]);
+            result.add(cur);
+            return result;
+        } else {
+            ArrayList<ArrayList<Integer>> prevRes = generate(length-1, num);
+            for (ArrayList<Integer> cur : prevRes) {
+             
+                for (int i = 0; i <= cur.size(); i ++) {
+                       ArrayList<Integer> newCur = new ArrayList<Integer>(cur);
+                       newCur.add(i,num[length-1]);
+                       result.add(newCur);
+                }
+                
+            }
+            return result;
+        }
+    }
+	
+    // http://en.wikipedia.org/wiki/Heap's_algorithm
 	private static void swap(ArrayList<Integer> v, int i, int j) {
 		int t = v.get(i);
 		v.set(i, v.get(j));
@@ -36,7 +81,7 @@ public class Permutations {
 	public void permute(ArrayList<Integer> v, int n, ArrayList<ArrayList<Integer>> result) {
 		if (n == 1) {
 			result.add(new ArrayList<Integer>(v));
-		} else {
+		} else { 
 			for (int i = 0; i < n; i++) {
 				permute(v, n - 1, result);
 				if (n % 2 == 1) {
