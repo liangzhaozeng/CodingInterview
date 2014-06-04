@@ -1,4 +1,4 @@
-package algorithm.lc;
+package interview.questions.linkedin;
 
 import java.util.ArrayList;
 import java.util.Comparator;

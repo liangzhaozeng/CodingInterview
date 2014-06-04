@@ -1,11 +1,11 @@
-package algorithm.cc150.chapter11;
+package interview.questions.linkedin;
 
 /**
  * Given an M x N matrix in which each row and each column is sorted, write a
  * method to find an element.
  * 
  */
-public class MatrixSearch{
+public class MatrixSearch {
 
   // this question is available at leetcode, question Search a 2D matrix
   // O(1) space, O(n + m) time

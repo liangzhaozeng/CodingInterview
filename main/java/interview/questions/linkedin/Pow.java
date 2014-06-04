@@ -1,4 +1,4 @@
-package algorithm.lc;
+package interview.questions.linkedin;
 
 /**
  * Implement pow(x, n)

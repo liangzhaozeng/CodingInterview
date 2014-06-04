@@ -1,4 +1,4 @@
-package interview.questions;
+package interview.questions.linkedin;
 
 import java.util.ArrayList;
 import java.util.List;
