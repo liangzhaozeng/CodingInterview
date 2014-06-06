@@ -5,7 +5,7 @@ package algorithm.cc150.chapter11;
  * method to find an element.
  * 
  */
-public class MatrixSearch{
+public class Question6{
 
   // this question is available at leetcode, question Search a 2D matrix
   // O(1) space, O(n + m) time

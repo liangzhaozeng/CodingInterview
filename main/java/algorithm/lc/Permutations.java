@@ -15,10 +15,48 @@ import java.util.List;
 public class Permutations {
 	
 	
+	
+   public static ArrayList<String> permulation(String str){
+	   ArrayList<String> result = new ArrayList<String>();
+	   if (str == null || str.length() == 0) return result;
+	   int n = str.length();
+	   char[] chars = str.toCharArray();
+	   permutation(chars, n, result);
+	   return result;
+   }
+   private static void permutation(char[] initiateStr, int length, ArrayList<String> result) {
+	   if (length == 1) {
+		   result.add(new String(initiateStr));
+		   System.out.println("Adding "+ new String(initiateStr));
+	   } else {
+		   for (int i = 0; i < length; i ++){
+			   permutation(initiateStr, length -1, result);
+			   System.out.print("Before  " + initiateStr);
+			   if (length % 2 == 1) {
+				   
+				   swapStr(initiateStr, 0, length-1);
+			   } else {
+				   swapStr(initiateStr, i, length-1);
+			   }
+			   System.out.println("After  " + initiateStr);
+		   }
+	   }
+   }
+  private static void swapStr(char[] str, int i, int j){
+	
+	  char temp = str[i];
+	  str[i]= str[j];
+	  str[j] = temp;
+	 
+  }
 	public static void main(String[] args) {
 		System.out.println("ABC".substring(0, 2));
 		System.out.println("ABC".substring(1, 1));
-		permutation("ABC");
+		permulation("ABC");
+		System.out.println ();
+		int[]A = {1,2,3};
+		permute(A);
+		//permutation("ABC");
 	}
 	public static void permutation(String str) { 
 	    permutation("", str); 
@@ -68,12 +106,14 @@ public class Permutations {
 	
     // http://en.wikipedia.org/wiki/Heap's_algorithm
 	private static void swap(ArrayList<Integer> v, int i, int j) {
+		System.out.println(i + " " + j);
+		
 		int t = v.get(i);
 		v.set(i, v.get(j));
 		v.set(j, t);
 	}
 
-	public ArrayList<ArrayList<Integer>> permute(int[] num) {
+	public static ArrayList<ArrayList<Integer>> permute(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> initiateList = new ArrayList<Integer>();
 		for (int i = 0; i < num.length; i++) {
@@ -86,17 +126,20 @@ public class Permutations {
 		return result;
 	}
 
-	public void permute(ArrayList<Integer> v, int n, ArrayList<ArrayList<Integer>> result) {
+	public static void permute(ArrayList<Integer> v, int n, ArrayList<ArrayList<Integer>> result) {
 		if (n == 1) {
 			result.add(new ArrayList<Integer>(v));
+			System.out.println("Adding " + new ArrayList<Integer>(v));
 		} else { 
 			for (int i = 0; i < n; i++) {
 				permute(v, n - 1, result);
+				System.out.print("Before " + v);
 				if (n % 2 == 1) {
 					swap(v, 0, n - 1);
 				} else {
 					swap(v, i, n - 1);
 				}
+				System.out.println("After " + v);
 			}
 		}
 	}
