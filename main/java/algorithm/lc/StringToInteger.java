@@ -1,4 +1,4 @@
-package algorithm.lc;
+  package algorithm.lc;
 
 /**
  * Implement atoi to convert a string to an integer. Hint: Carefully consider

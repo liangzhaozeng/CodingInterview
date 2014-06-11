@@ -37,30 +37,30 @@ public class PopulatingNextRightPointersInEachNodeII {
 			}
 
 			TreeLinkNode nextHead = null;
-			TreeLinkNode p = root;
+			TreeLinkNode curr = root;
 			TreeLinkNode pre = null;
-			while (p != null) {
-				if (p.left != null) {
+			while (curr != null) {
+				if (curr.left != null) {
 					if (pre == null) {
-						pre = p.left;  // start a new level
+						pre = curr.left;  // start a new level
 						nextHead = pre;
 					} else {
-						pre.next = p.left;
+						pre.next = curr.left;
 						pre = pre.next;
 					}
 				}
-				if (p.right != null) {
+				if (curr.right != null) {
 					if (pre == null) {
-						pre = p.right;
+						pre = curr.right;
 						nextHead = pre;
 					} else {
-						pre.next = p.right;
+						pre.next = curr.right;
 						pre = pre.next;
 					}
 				}
-				p = p.next;
-				if (p == null) {
-					p = nextHead;
+				curr = curr.next;
+				if (curr == null) {
+					curr = nextHead;
 					nextHead = null;
 					pre = null;
 				}

@@ -31,7 +31,7 @@ public class HashMapImplementation<K, V> {
 		public final boolean equals(Object o) {
 			if (!(o instanceof Entry))
 				return false;
-			Entry e = (Entry) o;
+			Entry<K,V> e = (Entry<K,V>) o;
 			Object k1 = getKey();
 			Object k2 = e.getKey();
 			if (k1 == k2 || (k1 != null && k1.equals(k2))) {
@@ -53,7 +53,7 @@ public class HashMapImplementation<K, V> {
 
 	}
 
-	private Entry[] table;// Entry数组表
+	private Entry<K,V>[] table;// Entry数组表
 	static final int DEFAULT_INITIAL_CAPACITY = 16;// 默认数组长度
 	private int size;
 

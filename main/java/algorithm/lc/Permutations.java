@@ -2,6 +2,7 @@ package algorithm.lc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -27,34 +28,44 @@ public class Permutations {
    private static void permutation(char[] initiateStr, int length, ArrayList<String> result) {
 	   if (length == 1) {
 		   result.add(new String(initiateStr));
+		   System.out.println("================================");
 		   System.out.println("Adding "+ new String(initiateStr));
+		   System.out.println("================================");
 	   } else {
-		   for (int i = 0; i < length; i ++){
+		   int i = 0;
+		   boolean isSame = false;
+		   while(i < length){
+			  if (isSame == false)
 			   permutation(initiateStr, length -1, result);
-			   System.out.print("Before  " + initiateStr);
+			   System.out.println("Before  " +  new String(initiateStr));
+			  
 			   if (length % 2 == 1) {
 				   
-				   swapStr(initiateStr, 0, length-1);
+				isSame = swapStr(initiateStr, 0, length-1);
 			   } else {
-				   swapStr(initiateStr, i, length-1);
+	            isSame = swapStr(initiateStr, i, length-1);
 			   }
-			   System.out.println("After  " + initiateStr);
+			   i ++;
+			//   if (isSame) 
+			   System.out.println("After  " + new String(initiateStr));
 		   }
 	   }
    }
-  private static void swapStr(char[] str, int i, int j){
-	
+  private static boolean swapStr(char[] str, int i, int j){
+	 
+	  if (str[i]==str[j]) return true;
 	  char temp = str[i];
 	  str[i]= str[j];
 	  str[j] = temp;
+	  return false;
 	 
   }
 	public static void main(String[] args) {
 		System.out.println("ABC".substring(0, 2));
 		System.out.println("ABC".substring(1, 1));
-		permulation("ABC");
-		System.out.println ();
-		int[]A = {1,2,3};
+	//	permulation("ABC");
+	//	System.out.println ();
+	int[]A = {1,1,2};
 		permute(A);
 		//permutation("ABC");
 	}
@@ -106,7 +117,7 @@ public class Permutations {
 	
     // http://en.wikipedia.org/wiki/Heap's_algorithm
 	private static void swap(ArrayList<Integer> v, int i, int j) {
-		System.out.println(i + " " + j);
+		//System.out.println(i + " " + j);
 		
 		int t = v.get(i);
 		v.set(i, v.get(j));
@@ -121,25 +132,29 @@ public class Permutations {
 		}
 
 		int length = num.length;
-		permute(initiateList, length, result);
-
+		HashSet<ArrayList<Integer>> set = new HashSet<ArrayList<Integer>>();
+		permute(initiateList, length, set);
+        result = new ArrayList<ArrayList<Integer>>(set);
+        for ( ArrayList<Integer> a: result){
+        	System.out.println(a);
+        }
 		return result;
 	}
 
-	public static void permute(ArrayList<Integer> v, int n, ArrayList<ArrayList<Integer>> result) {
+	public static void permute(ArrayList<Integer> v, int n, HashSet<ArrayList<Integer>> result) {
 		if (n == 1) {
-			result.add(new ArrayList<Integer>(v));
+			if (result.add(new ArrayList<Integer>(v)))
 			System.out.println("Adding " + new ArrayList<Integer>(v));
 		} else { 
 			for (int i = 0; i < n; i++) {
 				permute(v, n - 1, result);
-				System.out.print("Before " + v);
+			//	System.out.print("Before " + v);
 				if (n % 2 == 1) {
 					swap(v, 0, n - 1);
 				} else {
 					swap(v, i, n - 1);
 				}
-				System.out.println("After " + v);
+			//	System.out.println("After " + v);
 			}
 		}
 	}

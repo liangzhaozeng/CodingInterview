@@ -38,7 +38,7 @@ public class RemoveDuplicatesFromSortedArrayII {
 
 			int len = occur;
 			for (int i = occur; i < A.length; ++i) {
-				if (A[i] != A[len - occur]) {
+				if (A[len - occur] != A[i]) {
 					A[len++] = A[i];
 				}
 			}

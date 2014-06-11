@@ -20,7 +20,37 @@ import java.util.Set;
  * 
  */
 // O(2^n) space, O(2^n) time
+
+
+
 public class SubsetsII {
+	
+	
+
+public class Solution2 {
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
+        Arrays.sort(num);
+        return generate(num, num.length);
+    }
+    private ArrayList<ArrayList<Integer>> generate(int[] num,  int length) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        if (length ==0) {
+         ArrayList<Integer> empty = new ArrayList<Integer>();
+         result.add(empty);
+         return result;
+        } else {
+            ArrayList<ArrayList<Integer>> temp = generate(num, length-1);
+            HashSet<ArrayList<Integer>> set = new HashSet<ArrayList<Integer>>(temp);
+            for (ArrayList<Integer> cur : temp){
+                ArrayList<Integer> newCur = new ArrayList<Integer>(cur);
+                newCur.add(num[length-1]);
+                set.add(newCur);
+            }
+            return result = new ArrayList<ArrayList<Integer>>(set) ;
+        }
+        
+    }
+}
 
 	public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
