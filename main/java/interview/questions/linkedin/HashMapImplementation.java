@@ -49,19 +49,19 @@ public class HashMapImplementation<K, V> {
 		int hash = key.hashCode();
 		int index = indexFor(hash, table.length);
 		Entry<K, V> e = table[index];// 获取当前数组中的e
-		synchronized(e) {
-		// 如果添加的key已经存在，那么只需要修改value值即可
-		for (; e != null; e = e.next) {
-			Object k = e.key;
-			if (e.key.hashCode() == hash && (k == key || key.equals(k))) {
-				V oldValue = e.value;
-				e.value = value;
-				return oldValue;// 原来的value值
+		synchronized (e) {
+			// 如果添加的key已经存在，那么只需要修改value值即可
+			for (; e != null; e = e.next) {
+				Object k = e.key;
+				if (e.key.hashCode() == hash && (k == key || key.equals(k))) {
+					V oldValue = e.value;
+					e.value = value;
+					return oldValue;// 原来的value值
+				}
 			}
-		}
-		// 如果key值不存在，那么需要添加
-		
-		table[index] = new Entry<K, V>(key, value, e);// 新建一个Entry，并将其指向原先的e
+			// 如果key值不存在，那么需要添加
+
+			table[index] = new Entry<K, V>(key, value, e);// 新建一个Entry，并将其指向原先的e
 		}
 		return null;
 	}

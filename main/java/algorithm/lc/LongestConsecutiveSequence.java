@@ -13,6 +13,40 @@ import java.util.Set;
 // O(n) space, O(n) time
 public class LongestConsecutiveSequence {
 
+	
+	 public static int longestConsecutive(int[] num) {
+	        if (num == null) return 0;
+	        if (num.length <2) return num.length;
+	        HashSet<Integer> set = new HashSet<Integer>();
+	        for (int i :num) {
+	            set.add(i);
+	        }
+	        int max = 1;
+	        for (int i :num) {
+	            int cur = i+1;
+	            int temp = 1;
+	            while (set.contains(cur)) {
+	                temp ++;
+	                cur ++;
+	              
+	            }
+	            cur = i-1;
+	            while (set.contains(cur)){
+	                temp ++;
+	                cur --;
+	                set.remove(cur);
+	            }
+	            max = Math.max(max, temp);
+	        }
+	        
+	        return max;
+	    }
+	 
+	 public static void main(String[] args) {
+		 int[] A = {1, 0, -1};
+		 System.out.println(longestConsecutive(A));
+		 
+	 }
 	public class Solution {
 		// add all elements to set, and check each element by removing its
 		// neighbors

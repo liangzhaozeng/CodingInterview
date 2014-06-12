@@ -1,5 +1,7 @@
 package interview.questions.linkedin;
 
+import java.util.Stack;
+
 public class DeleteOne {
 
 	/**
@@ -32,6 +34,23 @@ public class DeleteOne {
 		}
 
 		return vt;
+	}
+
+	public int getSmallest(String input, int k) {
+		if (input == null || k > input.length())
+			return 0;
+		Stack<Character> s = new Stack<Character>();
+		for (int i = 0; i < input.length(); i++) {
+			while (!s.isEmpty() && s.peek() > input.charAt(i) && k-- > 0)
+				s.pop();
+			s.push(input.charAt(i));
+		}
+		while (k-- > 0)
+			s.pop();
+		String rl = "";
+		while (!s.isEmpty())
+			rl = s.pop() + rl;
+		return Integer.parseInt(rl.length() == 0 ? "0" : rl);
 	}
 
 }
