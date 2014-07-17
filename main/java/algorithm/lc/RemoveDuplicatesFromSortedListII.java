@@ -21,7 +21,40 @@ public class RemoveDuplicatesFromSortedListII {
     }
   }
 
+  public ListNode deleteDuplicates(ListNode head) {
+      if (head == null || head.next == null) return head;
+      ListNode fakeHead = new ListNode(0);
+      fakeHead.next = head;
+      ListNode prev = head;
+      ListNode cur = head.next;
+      ListNode curTail = fakeHead;
+      boolean hasDuplicate = false;
+      while (cur != null) {
+          
+          if (prev.val == cur.val) {
+              hasDuplicate = true;
+              cur = cur.next;
+              curTail.next = cur;
+          } else {
+              if (hasDuplicate) {
+                 curTail.next = cur;
+                 prev = cur;
+                 cur = cur.next;
+                 hasDuplicate = false;
+              
+              } else {
+                  curTail= prev;
+                  cur = cur.next;
+                  prev = curTail.next;
+              }
+          }
+          
+      }
+      return fakeHead.next;
+  }
   public class Solution {
+	  
+	  
 	  
 	  public ListNode deleteDuplicates2(ListNode head) {
 	        if (head ==null || head.next==null) {

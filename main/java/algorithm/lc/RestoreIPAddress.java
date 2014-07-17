@@ -31,14 +31,12 @@ public class RestoreIPAddress {
 
 			for (int i = 0; i < Math.min(s.length(), 3); i++) {
 				String num = s.substring(0, i + 1);
-				if ((i == 0 || num.charAt(0) > '0')
-						&& Integer.parseInt(num) <= 255) {
+				if ((i == 0 || num.charAt(0) > '0') && Integer.parseInt(num) <= 255) {
 					if (k == 1) {
 						if (i == s.length() - 1)
 							res.add(num);
 					} else {
-						ArrayList<String> remain = restoreIPAddresses(
-								s.substring(i + 1), k - 1);
+						ArrayList<String> remain = restoreIPAddresses(s.substring(i + 1), k - 1);
 						if (remain != null) {
 							for (String r : remain) {
 								String temp = num + '.' + r;

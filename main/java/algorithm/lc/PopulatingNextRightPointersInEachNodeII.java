@@ -29,6 +29,42 @@ public class PopulatingNextRightPointersInEachNodeII {
 			val = x;
 		}
 	}
+	
+	  public void connectA(TreeLinkNode root) {
+			if (root == null) {
+				return;
+			}
+
+			TreeLinkNode linkHead = null;
+			TreeLinkNode curr = root;
+			TreeLinkNode linkCur = null;
+			while (curr != null) {
+				if (curr.left != null) {
+					if (linkHead == null) {
+						linkHead = curr.left;  // start a new level
+						linkCur = linkHead;
+					} else {
+					    linkCur.next = curr.left;
+						linkCur = linkCur.next;
+					}
+				}
+				if (curr.right != null) {
+					if (linkHead == null) {
+						linkHead = curr.right;
+						linkCur = linkHead;
+					} else {
+						linkCur.next = curr.right;
+					    linkCur = linkCur.next;
+					}
+				}
+				curr = curr.next;
+				if (curr == null) {  // this level is done, go to next level
+					curr = linkHead;
+					linkHead = null;
+					linkCur = null;
+				}
+			}
+  }
 
 	public class PopulatingNextRightPointersInEachNode {
 		public void connect(TreeLinkNode root) {

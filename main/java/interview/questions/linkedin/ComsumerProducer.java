@@ -2,6 +2,7 @@ package interview.questions.linkedin;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Vector;
 
 public class ComsumerProducer {
@@ -15,12 +16,21 @@ public class ComsumerProducer {
 	 */
 
 	public static void main(String args[]) {
+		/*
 		Queue<Integer> sQueue = new LinkedList<Integer>();
 		int size = 4; // vector can contain upto 5 elements
 		Thread producerThread = new Thread(new Producer(sQueue, size), "Producer");
 		Thread consumerThread = new Thread(new Consumer(sQueue, size, producerThread), "Consumer");
 		producerThread.start();
 		consumerThread.start();
+		*/
+		
+		IntBuffer b = new IntBuffer();
+		ConsumerA c = new ConsumerA(b);
+		ProducerA p = new ProducerA(b);
+		p.start();
+		c.start();
+		
 	}
 }
 
@@ -64,6 +74,66 @@ class Producer implements Runnable {
 		synchronized (sQueue) {
 			sQueue.add(i);
 			sQueue.notifyAll();
+		}
+	}
+}
+
+class IntBuffer {
+	private int index;
+	private int size = 8;
+	private int[] buffer = new int[size];
+	public synchronized void add( int num) {
+		while (index == buffer.length-1) {
+			try {
+				wait();
+			}catch (InterruptedException e) {
+				
+			}
+		}
+		buffer[index++]= num;
+		notifyAll();
+	}
+	
+	public synchronized int remove() {
+		while (index == 0) {
+			try {
+				wait();
+			}catch (InterruptedException e) {
+				
+			}
+		}
+		int result = buffer[--index];
+		notifyAll();
+		return result;
+	}
+}
+
+class ProducerA extends Thread {
+	private IntBuffer buffer;
+	public ProducerA (IntBuffer buffer){
+		this.buffer = buffer;
+	}
+	public void run() {
+		Random r = new Random();
+		while (true) {
+			int num = r.nextInt();
+			buffer.add(num);
+			System.out.println(" produced " + num);
+		}
+	}
+}
+
+class ConsumerA extends Thread {
+	private IntBuffer buffer;
+	public ConsumerA (IntBuffer buffer){
+		this.buffer = buffer;
+	}
+	public void run() {
+		Random r = new Random();
+		while (true) {
+			
+		  int num =	buffer.remove();
+			System.out.println(" consumed " + num);
 		}
 	}
 }

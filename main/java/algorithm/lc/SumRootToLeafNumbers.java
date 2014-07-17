@@ -33,6 +33,16 @@ public class SumRootToLeafNumbers {
     }
   }
 
+  private int sumNumbers(TreeNode root, int cur) {
+      if (root == null) return cur;
+      if (root.left == null && root.right == null) return  cur*10 + root.val;
+      cur = cur*10 + root.val;
+      int left = root.left != null ? sumNumbers(root.left, cur):0;
+      int right = root.right !=null ? sumNumbers(root.right, cur):0;
+      
+      return left + right;
+  }
+  
   public class Solution {
     public int sumNumbers(TreeNode root) {
       // Start typing your Java solution below

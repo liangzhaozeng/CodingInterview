@@ -30,6 +30,28 @@ public class ReverseNodesInKGroup {
 			next = null;
 		}
 	}
+	
+	public ListNode reverseKGroup3(ListNode head, int k) {
+        if (head == null || head.next == null || k<2) return head;
+        ListNode cur = head;
+        for (int i = 0; i<k; i ++) {
+            if (cur == null) return head;
+            cur = cur.next;
+        }
+        
+        ListNode nextHead  = null;
+        if (cur != null) {
+           nextHead = reverseKGroup3(cur, k);
+        }
+        cur = head;
+        for (int i = 0; i < k; i ++){
+            ListNode next = cur.next;
+            cur.next = nextHead;
+            nextHead = cur;
+            cur = next;
+        }
+        return nextHead;
+    }
 
 	public static ListNode reverseKGroup(ListNode head, int k) {
 		if (k < 2 || head == null || head.next == null)

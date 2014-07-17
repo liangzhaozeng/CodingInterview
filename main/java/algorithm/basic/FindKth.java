@@ -2,12 +2,13 @@ package algorithm.basic;
 
 public class FindKth {
 	private int split(int[] list, int lo, int hi){
-		int left = lo +1;
-		int right = hi;
-		int pivot = list[lo];
+		int left = lo +1;  // left
+		int right = hi;    // right
+		int pivot = list[lo]; // candidate
 		
-		while (true) {
-			while (left <= right){
+		while (true) {     // while true
+			
+			while (left <= right){  // first condition
 				if (list[left] < pivot){
 					left ++;
 				} else {
@@ -15,7 +16,7 @@ public class FindKth {
 				}
 			}
 			
-			while (right > left) {
+			while (right > left) {   // other condition  different from previous 
 				if (list[right]< pivot){
 					break;
 				}else {
@@ -23,15 +24,15 @@ public class FindKth {
 				}
 			}
 			
-			if (left >= right)
+			if (left >= right)        // already over lap
 				break;
 		
-			int temp = list[left];
+			int temp = list[left];    // swap left and right
 			list[left]= list[right];
 			list[right] = temp;
 			
-			left ++;
-			right ++;
+			left ++;                 // advance both left and right  
+			right --;
 		}
 		list[lo] = list[left -1];
 		list[left -1] = pivot;

@@ -47,7 +47,7 @@ public class DFS {
 
 	// DFS traversal of the vertices reachable from v. It uses recursive
 	// DFSUtil()
-	static void DFS(Graph graph, int v) {
+	static void DFS2(Graph graph, int v) {
 		// Mark all the vertices as not visited
 		boolean[] visited = new boolean[graph.V];
 		for (int i = 0; i < graph.V; i++)
@@ -101,7 +101,7 @@ public class DFS {
 
 		System.out
 				.println("Following is Depth First Traversal (starting from vertex 2) ");
-		DFS(g, 2);
+		DFS2(g, 2);
 		System.out.println();
 		System.out
 				.println("Following is Depth First Traversal (starting from vertex 2) ");

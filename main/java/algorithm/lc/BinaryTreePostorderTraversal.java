@@ -35,7 +35,7 @@ public class BinaryTreePostorderTraversal {
 		}
 		while (!stack.isEmpty()) {
 			TreeNode cur = stack.peek();
-			if (prev == null || prev.left == cur || prev.right == cur) {
+			if (prev == null || prev.left == cur || prev.right == cur) { // going down
 				if (cur.left != null) {
 					stack.push(cur.left);
 				} else if (cur.right != null) {

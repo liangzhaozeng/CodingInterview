@@ -15,14 +15,15 @@ package algorithm.lc;
  */
 // O(n) space, O(kn) time
 public class PermutationSequence {
-	public String getPermutation(int n, int k) {
+	public static String getPermutation(int n, int k) {
 		boolean[] output = new boolean[n];
 		StringBuilder buf = new StringBuilder("");
 		int[] res = new int[n];
 		res[0] = 1;
-		for (int i = 1; i < n; i++)
+		for (int i = 1; i < n; i++) {
 			res[i] = res[i - 1] * i;
-
+		    System.out.println(res[i]);
+		}
 		for (int i = n - 1; i >= 0; i--) {
 			int s = 1;
 			while (k > res[i]) {
@@ -40,6 +41,10 @@ public class PermutationSequence {
 		return buf.toString();
 	}
 
+	public static void main(String[] args) {
+		System.out.println(getPermutation(4, 10));
+	}
+	
 	public class Solution {
 		public String getPermutation(int n, int k) {
 			// Start typing your Java solution below

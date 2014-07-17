@@ -143,7 +143,22 @@ public class TreeQuestions {
 			this.val = val;
 		}
 	}
+	
+	/**
+	 * all the path
+	 */
 
+	public static ArrayList<ArrayList<Integer>> allPath (TreeNode node) {
+		
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		
+		
+		
+		return result;
+		
+		
+	}
+	
 	/**
 	 * 求二叉树中的节点个数递归解法： O(n)
 	 * （1）如果二叉树为空，节点个数为0 

@@ -1,4 +1,4 @@
-package algorithm.lc;
+ package algorithm.lc;
 
 /**
  * Implement strStr().

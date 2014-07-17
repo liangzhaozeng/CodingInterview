@@ -11,71 +11,84 @@ package algorithm.lc;
  */
 public class SwapNodesInPairs {
 
-  public class ListNode {
-    int val;
-    ListNode next;
+	public ListNode swapPairs(ListNode head) {
+		if (head == null || head.next == null)
+			return head;
+		ListNode cur = head.next;
 
-    ListNode(int x) {
-      val = x;
-      next = null;
-    }
-  }
+		ListNode nextHead = swapPairs(cur.next);
 
-  // O(1) space, O(n) time
-  public class Solution {
-    // use three pointer to traverse the list
-    public ListNode swapPairs(ListNode head) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      ListNode fakeHead = new ListNode(0);
-      fakeHead.next = head;
-      ListNode prev = fakeHead;
-      ListNode cur = fakeHead.next;
+		cur.next = head;
+		head.next = nextHead;
 
-      while (cur != null) {
-        ListNode next = cur.next;
-        if (next != null) {
-          cur.next = next.next;
-          next.next = cur;
-          prev.next = next;
-          prev = cur;
-        }
-        cur = cur.next;
-      }
+		return cur;
+	}
 
-      return fakeHead.next;
-    }
-  }
+	public class ListNode {
+		int val;
+		ListNode next;
 
-  // O(1) space, O(n) time
-  public class Solution2 {
-    public ListNode swapPairs(ListNode head) {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      ListNode fakeHead = new ListNode(0);
-      fakeHead.next = head;
-      ListNode cur = fakeHead;
-      ListNode slow;
-      ListNode fast;
-      while (true) {
-        slow = cur;
-        slow = slow.next;
-        if (slow != null) {
-          fast = slow.next;
-        } else {
-          break;
-        }
-        if (fast != null) {
-          slow.next = fast.next;
-          fast.next = slow;
-          cur.next = fast;
-        } else {
-          break;
-        }
-        cur = slow;
-      }
-      return fakeHead.next;
-    }
-  }
+		ListNode(int x) {
+			val = x;
+			next = null;
+		}
+	}
+
+	// O(1) space, O(n) time
+	public class Solution {
+		// use three pointer to traverse the list
+		public ListNode swapPairs(ListNode head) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			ListNode fakeHead = new ListNode(0);
+			fakeHead.next = head;
+			ListNode prev = fakeHead;
+			ListNode cur = fakeHead.next;
+
+			while (cur != null) {
+				ListNode next = cur.next;
+				if (next != null) {
+					cur.next = next.next;
+					next.next = cur;
+					prev.next = next;
+					prev = cur;
+				}
+				cur = cur.next;
+			}
+
+			return fakeHead.next;
+		}
+	}
+
+	// O(1) space, O(n) time
+	public class Solution2 {
+		public ListNode swapPairs(ListNode head) {
+			// Start typing your Java solution below
+			// DO NOT write main() function
+			ListNode fakeHead = new ListNode(0);
+			fakeHead.next = head;
+			ListNode cur = fakeHead;
+			ListNode slow;
+			ListNode fast;
+			while (true) {
+				slow = cur;
+				slow = slow.next;
+				if (slow != null) {
+					fast = slow.next;
+				} else {
+					break;
+				}
+				if (fast != null) {
+					slow.next = fast.next;
+					fast.next = slow;
+					cur.next = fast;
+				} else {
+					break;
+				}
+				cur = slow;
+			}
+			return fakeHead.next;
+		}
+	}
 
 }
