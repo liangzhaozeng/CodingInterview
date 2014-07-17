@@ -1,4 +1,4 @@
-package interview.questions.google;
+package interview.questions.google.sort;
 
 import java.util.Arrays;
 
